@@ -16,7 +16,8 @@ class RencanaP3d extends Model
         'kecamatan_id',
         'jumlah_formasi_kosong',
         'jabatan_kosong',
-        'rencana_pelaksanaan',
+        'rencana_pelaksanaan_mulai',
+        'rencana_pelaksanaan_selesai',
         'rencana_anggaran',
         'keterangan',
         'status',
@@ -24,7 +25,8 @@ class RencanaP3d extends Model
     ];
 
     protected $casts = [
-        'rencana_pelaksanaan' => 'date',
+        'rencana_pelaksanaan_mulai' => 'date',
+        'rencana_pelaksanaan_selesai' => 'date',
         'rencana_anggaran' => 'decimal:2',
         'jumlah_formasi_kosong' => 'integer',
         'tahun' => 'integer',

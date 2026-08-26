@@ -7,10 +7,6 @@
             <h1 class="text-2xl font-bold text-slate-900 font-display">Halo, Admin Dinpermasdes</h1>
             <p class="text-slate-500 mt-0.5 text-sm">Selamat datang kembali di pusat kendali administrasi desa Anda.</p>
         </div>
-        <button class="bg-[#111827] text-white px-4 py-2 rounded-lg flex items-center gap-2 font-semibold hover:bg-slate-800 transition-colors text-sm">
-            <span class="material-symbols-outlined text-[18px]">add_circle</span>
-            Buat Dokumen Baru
-        </button>
     </div>
 
     <!-- 8 Stat Cards Grid -->
@@ -227,14 +223,14 @@
             <div class="w-32 h-32 mx-auto relative flex items-center justify-center">
                 <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                     <path class="text-slate-100" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    <path class="text-[#111827]" stroke-width="4" stroke-dasharray="85, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="text-[#111827]" stroke-width="4" stroke-dasharray="{{ $charts['efisiensi'] ?? 0 }}, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                 </svg>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="text-2xl font-bold font-display text-slate-900">85%</span>
+                    <span class="text-2xl font-bold font-display text-slate-900">{{ $charts['efisiensi'] ?? 0 }}%</span>
                 </div>
             </div>
             <h4 class="mt-6 font-bold text-slate-900">Efisiensi Layanan</h4>
-            <p class="text-xs text-slate-500 mt-1">Peningkatan 5% dari bulan lalu</p>
+            <p class="text-xs text-slate-500 mt-1">Rasio ajuan desa yang disubmit</p>
         </div>
         
         <!-- Chart 2 -->
@@ -245,11 +241,11 @@
                     <path class="text-[#6fa7e9]" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                 </svg>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="text-2xl font-bold font-display text-slate-900">128</span>
+                    <span class="text-2xl font-bold font-display text-slate-900">{{ $charts['pemohon'] ?? 0 }}</span>
                 </div>
             </div>
             <h4 class="mt-6 font-bold text-slate-900">Pemohon Aktif</h4>
-            <p class="text-xs text-slate-500 mt-1">Total warga yang mengakses layanan</p>
+            <p class="text-xs text-slate-500 mt-1">Total desa pemohon bulan ini</p>
         </div>
 
         <!-- Chart 3 -->
@@ -257,14 +253,14 @@
             <div class="w-32 h-32 mx-auto relative flex items-center justify-center">
                 <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                     <path class="text-slate-100" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    <path class="text-slate-400" stroke-width="4" stroke-dasharray="92, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="text-slate-400" stroke-width="4" stroke-dasharray="{{ $charts['akurasi'] ?? 0 }}, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                 </svg>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="text-2xl font-bold font-display text-slate-900">92%</span>
+                    <span class="text-2xl font-bold font-display text-slate-900">{{ $charts['akurasi'] ?? 0 }}%</span>
                 </div>
             </div>
             <h4 class="mt-6 font-bold text-slate-900">Akurasi Data</h4>
-            <p class="text-xs text-slate-500 mt-1">Verifikasi kependudukan sukses</p>
+            <p class="text-xs text-slate-500 mt-1">Verifikasi perangkat & BPD sukses</p>
         </div>
     </div>
 </x-app-layout>

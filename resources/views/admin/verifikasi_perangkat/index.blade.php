@@ -33,19 +33,28 @@
         <div x-show="tab === 'data'" style="display: none;" x-transition>
             <div class="mb-6">
                 <form action="{{ route('admin.perangkat.index') }}" method="GET" class="w-full">
-                    <div class="relative rounded-md shadow-sm">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+                    <div class="flex gap-4">
+                        <div class="relative flex-grow rounded-md shadow-sm">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+                            </div>
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama, jabatan, desa..."
+                                class="block w-full rounded-md border-0 py-2 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
                         </div>
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama, jabatan, desa..."
-                            class="block w-full rounded-md border-0 py-2 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+                        <div class="w-48">
+                            <select name="status" onchange="this.form.submit()" class="block w-full rounded-md border-0 py-2 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+                                <option value="">Semua Status ({{ $totalAktif + $totalNonaktif }})</option>
+                                <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Aktif ({{ $totalAktif }})</option>
+                                <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Nonaktif ({{ $totalNonaktif }})</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($perangkats as $p)
-                    <div class="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 flex flex-col hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] transition-shadow border border-slate-100">
+                    <div x-data="" x-on:click="$dispatch('open-modal', 'detail-{{ $p->id }}')" class="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 flex flex-col hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] transition-shadow border border-slate-100 cursor-pointer">
                         <div class="flex justify-between items-start mb-8">
                             <div class="w-[72px] h-[72px] rounded-full bg-slate-200 flex flex-shrink-0 items-center justify-center overflow-hidden">
                                 <span class="material-symbols-outlined text-slate-400 text-[36px]">person</span>
@@ -67,6 +76,49 @@
                             <p class="text-[14px] text-slate-600">{{ $p->desa->nama_desa ?? 'Desa' }}, {{ $p->desa->kecamatan->nama_kecamatan ?? 'Kecamatan' }}</p>
                         </div>
                     </div>
+
+                    <x-modal name="detail-{{ $p->id }}" :show="false" maxWidth="sm" focusable>
+                        <div class="p-6">
+                            <h2 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Detail Perangkat Desa</h2>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-sm text-gray-500">Nama</p>
+                                    <p class="font-medium text-gray-900">{{ $p->nama }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Jabatan</p>
+                                    <p class="font-medium text-gray-900">{{ $p->jabatan }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Desa / Kecamatan</p>
+                                    <p class="font-medium text-gray-900">{{ $p->desa->nama_desa ?? '-' }} / {{ $p->desa->kecamatan->nama_kecamatan ?? '-' }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Tanggal Mulai Jabatan</p>
+                                    <p class="font-medium text-gray-900">{{ $p->tgl_mulai_jabatan ? $p->tgl_mulai_jabatan->format('d F Y') : '-' }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">No. SK Terakhir</p>
+                                    <p class="font-medium text-gray-900">{{ $p->no_sk_terakhir ?? '-' }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">File SK</p>
+                                    @if($p->file_sk)
+                                        <a href="{{ asset('storage/' . $p->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 mt-1 text-sm text-primary font-bold hover:underline bg-blue-50 px-3 py-1.5 rounded-lg">
+                                            <span class="material-symbols-outlined text-[16px]">description</span> Lihat File SK
+                                        </a>
+                                    @else
+                                        <p class="font-medium text-gray-900">-</p>
+                                    @endif
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-end">
+                                <button type="button" x-on:click="$dispatch('close')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200">Tutup</button>
+                            </div>
+                        </div>
+                    </x-modal>
                 @empty
                     <div class="col-span-full">
                         <div class="bg-white rounded-card shadow-sm border border-border p-8 text-center">
@@ -112,6 +164,9 @@
                                     <div class="text-xs text-muted">{{ $item->jabatan }}</div>
                                     <div class="text-xs text-muted">Mulai: {{ $item->tgl_mulai_jabatan ? $item->tgl_mulai_jabatan->format('d/m/Y') : '-' }}</div>
                                     <div class="text-xs text-muted">SK: {{ $item->no_sk_terakhir ?? '-' }}</div>
+                                    @if($item->file_sk)
+                                        <a href="{{ asset('storage/' . $item->file_sk) }}" target="_blank" class="text-xs text-primary font-bold hover:underline mt-1 inline-block">Lihat File SK</a>
+                                    @endif
                                 @endif
                             </td>
                             <td class="px-6 py-4">
@@ -131,11 +186,17 @@
                                     <div class="text-xs text-muted">{{ $item->draft_perubahan['jabatan'] ?? $item->jabatan }}</div>
                                     <div class="text-xs text-muted">Mulai: {{ isset($item->draft_perubahan['tgl_mulai_jabatan']) ? date('d/m/Y', strtotime($item->draft_perubahan['tgl_mulai_jabatan'])) : '-' }}</div>
                                     <div class="text-xs text-muted">SK: {{ $item->draft_perubahan['no_sk_terakhir'] ?? '-' }}</div>
+                                    @if(isset($item->draft_perubahan['file_sk']))
+                                        <a href="{{ asset('storage/' . $item->draft_perubahan['file_sk']) }}" target="_blank" class="text-xs text-primary font-bold hover:underline mt-1 inline-block">Lihat File SK Baru</a>
+                                    @endif
                                 @elseif($item->status_verifikasi === 'pending_tambah')
                                     <div class="font-medium text-ink">{{ $item->nama }}</div>
                                     <div class="text-xs text-muted">{{ $item->jabatan }}</div>
                                     <div class="text-xs text-muted">Mulai: {{ $item->tgl_mulai_jabatan ? $item->tgl_mulai_jabatan->format('d/m/Y') : '-' }}</div>
                                     <div class="text-xs text-muted">SK: {{ $item->no_sk_terakhir ?? '-' }}</div>
+                                    @if($item->file_sk)
+                                        <a href="{{ asset('storage/' . $item->file_sk) }}" target="_blank" class="text-xs text-primary font-bold hover:underline mt-1 inline-block">Lihat File SK Baru</a>
+                                    @endif
                                 @else
                                     <span class="text-muted italic">-</span>
                                 @endif

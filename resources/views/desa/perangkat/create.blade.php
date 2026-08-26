@@ -21,7 +21,7 @@
         </div>
 
         <div class="bg-white rounded-card shadow-sm border border-border p-6">
-            <form action="{{ route('desa.perangkat.store') }}" method="POST">
+            <form action="{{ route('desa.perangkat.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="space-y-5">
@@ -59,6 +59,15 @@
                         <input type="date" name="tgl_mulai_jabatan" value="{{ old('tgl_mulai_jabatan') }}"
                             class="w-full rounded-md border-border text-sm shadow-sm focus:border-primary focus:ring-primary">
                         @error('tgl_mulai_jabatan') <span
+                        class="text-xs text-danger font-medium mt-1">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-ink mb-1">Upload File SK</label>
+                        <input type="file" name="file_sk" accept=".pdf,.jpg,.jpeg,.png"
+                            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary-light">
+                        <p class="text-xs text-muted mt-1">Format didukung: PDF, JPG, PNG (Maks 10MB)</p>
+                        @error('file_sk') <span
                         class="text-xs text-danger font-medium mt-1">{{ $message }}</span> @enderror
                     </div>
                 </div>

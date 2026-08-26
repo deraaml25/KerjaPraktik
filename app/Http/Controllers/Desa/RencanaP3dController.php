@@ -29,20 +29,22 @@ class RencanaP3dController extends Controller
         $request->validate([
             'jumlah_formasi_kosong' => ['required', 'integer', 'min:1'],
             'jabatan_kosong' => ['required', 'string'],
-            'rencana_pelaksanaan' => ['required', 'date'],
+            'rencana_pelaksanaan_mulai' => ['required', 'date'],
+            'rencana_pelaksanaan_selesai' => ['required', 'date', 'after_or_equal:rencana_pelaksanaan_mulai'],
             'rencana_anggaran' => ['required', 'numeric', 'min:0'],
             'keterangan' => ['nullable', 'string'],
         ]);
 
         $desa = Auth::user()->desa;
-        $tahun = Carbon::parse($request->rencana_pelaksanaan)->year;
+        $tahun = Carbon::parse($request->rencana_pelaksanaan_mulai)->year;
 
         RencanaP3d::create([
             'desa_id' => $desa->id,
             'kecamatan_id' => $desa->kecamatan_id,
             'jumlah_formasi_kosong' => $request->jumlah_formasi_kosong,
             'jabatan_kosong' => $request->jabatan_kosong,
-            'rencana_pelaksanaan' => $request->rencana_pelaksanaan,
+            'rencana_pelaksanaan_mulai' => $request->rencana_pelaksanaan_mulai,
+            'rencana_pelaksanaan_selesai' => $request->rencana_pelaksanaan_selesai,
             'rencana_anggaran' => $request->rencana_anggaran,
             'keterangan' => $request->keterangan,
             'status' => 'dikirim',
@@ -76,18 +78,20 @@ class RencanaP3dController extends Controller
         $request->validate([
             'jumlah_formasi_kosong' => ['required', 'integer', 'min:1'],
             'jabatan_kosong' => ['required', 'string'],
-            'rencana_pelaksanaan' => ['required', 'date'],
+            'rencana_pelaksanaan_mulai' => ['required', 'date'],
+            'rencana_pelaksanaan_selesai' => ['required', 'date', 'after_or_equal:rencana_pelaksanaan_mulai'],
             'rencana_anggaran' => ['required', 'numeric', 'min:0'],
             'keterangan' => ['nullable', 'string'],
             'status' => ['nullable', 'string', 'in:draft,dikirim,disetujui'],
         ]);
 
-        $tahun = Carbon::parse($request->rencana_pelaksanaan)->year;
+        $tahun = Carbon::parse($request->rencana_pelaksanaan_mulai)->year;
 
         $rencanaP3d->update([
             'jumlah_formasi_kosong' => $request->jumlah_formasi_kosong,
             'jabatan_kosong' => $request->jabatan_kosong,
-            'rencana_pelaksanaan' => $request->rencana_pelaksanaan,
+            'rencana_pelaksanaan_mulai' => $request->rencana_pelaksanaan_mulai,
+            'rencana_pelaksanaan_selesai' => $request->rencana_pelaksanaan_selesai,
             'rencana_anggaran' => $request->rencana_anggaran,
             'keterangan' => $request->keterangan,
             'tahun' => $tahun,

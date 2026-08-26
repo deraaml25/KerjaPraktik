@@ -8,6 +8,11 @@ class Desa extends Model
 {
     protected $fillable = ['nama_desa', 'kecamatan_id'];
 
+    public function getNamaDesaAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class);

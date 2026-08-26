@@ -11,6 +11,7 @@
         ['route' => 'admin.perangkat.index', 'icon' => 'badge', 'text' => 'Data Kepala dan Perangkat Desa', 'active' => request()->routeIs('admin.perangkat.*')],
         ['route' => 'admin.bpd.index', 'icon' => 'groups', 'text' => 'Data BPD', 'active' => request()->routeIs('admin.bpd.*')],
         ['route' => 'admin.ajuan-bpd.index', 'icon' => 'post_add', 'text' => 'Ajuan BPD', 'active' => request()->routeIs('admin.ajuan-bpd.*')],
+        ['route' => 'admin.akun_desa.index', 'icon' => 'manage_accounts', 'text' => 'Manajemen Akun', 'active' => request()->routeIs('admin.akun_desa.*')],
     ];
 @endphp
 

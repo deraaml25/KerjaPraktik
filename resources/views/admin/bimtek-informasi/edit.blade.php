@@ -53,9 +53,16 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="foto" class="block text-sm font-medium text-ink mb-1">Foto Baru (Opsional)</label>
-                        @if($bimtekInformasi->foto)
+                        @if($bimtekInformasi->foto && is_array($bimtekInformasi->foto) && count($bimtekInformasi->foto) > 0)
+                            <div class="mb-2 flex flex-wrap gap-2">
+                                @foreach($bimtekInformasi->foto as $img)
+                                    <img src="{{ Storage::url($img) }}" class="h-20 rounded object-cover" alt="Foto saat ini">
+                                @endforeach
+                            </div>
+                            <p class="text-xs text-muted mb-2">Foto saat ini. Upload baru untuk mengganti semua foto.</p>
+                        @elseif($bimtekInformasi->foto && is_string($bimtekInformasi->foto))
                             <div class="mb-2">
-                                <img src="{{ asset('storage/' . $bimtekInformasi->foto) }}" class="h-20 rounded object-cover" alt="Foto saat ini">
+                                <img src="{{ Storage::url($bimtekInformasi->foto) }}" class="h-20 rounded object-cover" alt="Foto saat ini">
                                 <p class="text-xs text-muted mt-1">Foto saat ini. Upload baru untuk mengganti.</p>
                             </div>
                         @endif

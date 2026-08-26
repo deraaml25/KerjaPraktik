@@ -248,7 +248,7 @@ class DriveController extends Controller
         $path = $request->input('path', 'dokumen');
         $file = $request->file('file');
         $filename = time().'_'.$file->getClientOriginalName();
-        $file->storeAs('public/'.$path, $filename);
+        $file->storeAs($path, $filename, 'public');
 
         return back()->with('success', 'Dokumen berhasil diunggah.');
     }
@@ -321,6 +321,21 @@ class DriveController extends Controller
         $zip->close();
 
         return response()->download($zipName, $label.'.zip')->deleteFileAfterSend(true);
+    }
+
+    public function delete(Request $request)
+    {
+        $path = $request->input('file_path');
+        if (empty($path)) {
+            return back()->with('error', 'File tidak ditemukan.');
+        }
+
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+            return back()->with('success', 'File berhasil dihapus.');
+        }
+
+        return back()->with('error', 'File tidak ditemukan di server.');
     }
 
     private function buildBreadcrumbs($path)

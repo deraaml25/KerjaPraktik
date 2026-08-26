@@ -59,7 +59,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-ink font-medium">
-                                    {{ $item->rencana_pelaksanaan ? $item->rencana_pelaksanaan->format('d M Y') : '-' }}
+                                    {{ $item->rencana_pelaksanaan_mulai ? $item->rencana_pelaksanaan_mulai->format('d M Y') : '-' }} s/d {{ $item->rencana_pelaksanaan_selesai ? $item->rencana_pelaksanaan_selesai->format('d M Y') : '-' }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

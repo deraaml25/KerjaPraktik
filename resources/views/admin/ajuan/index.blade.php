@@ -73,7 +73,7 @@
                             <td class="px-6 py-4 font-medium text-center whitespace-nowrap">
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('admin.ajuan.show', $ajuan) }}" class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded bg-primary text-white hover:bg-primary-light transition-all hover:scale-105 shadow-sm">
-                                        Verifikasi Split-Screen
+                                        Verifikasi
                                     </a>
                                     <form action="{{ route('admin.ajuan.destroy', $ajuan->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data usulan ini secara permanen? Semua berkas terkait akan ikut terhapus.');" class="inline">
                                         @csrf

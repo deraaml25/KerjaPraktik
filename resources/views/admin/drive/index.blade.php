@@ -117,19 +117,30 @@
                             $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
                             $isImg = in_array(strtolower($ext), ['jpg', 'jpeg', 'png']);
                         @endphp
-                        <a href="{{ $file['url'] }}" target="_blank" class="block bg-white border border-slate-100 rounded-[20px] p-4 hover:shadow-sm transition-all flex flex-col justify-between">
-                            <div class="mb-4 flex items-center justify-center h-16 bg-slate-50 rounded-lg overflow-hidden relative">
-                                @if($isImg)
-                                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $file['url'] }}')"></div>
-                                @else
-                                    <svg class="w-8 h-8 text-slate-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
-                                @endif
-                            </div>
-                            <div>
-                                <h4 class="text-[13px] font-medium text-ink truncate" title="{{ $file['name'] }}">{{ $file['name'] }}</h4>
-                                <p class="text-[10px] text-slate-400 mt-1">{{ round($file['size'] / 1024) }} KB</p>
-                            </div>
-                        </a>
+                        <div class="relative block bg-white border border-slate-100 rounded-[20px] p-4 hover:shadow-sm transition-all flex flex-col justify-between group">
+                            <a href="{{ $file['url'] }}" target="_blank" class="block flex-1">
+                                <div class="mb-4 flex items-center justify-center h-16 bg-slate-50 rounded-lg overflow-hidden relative">
+                                    @if($isImg)
+                                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $file['url'] }}')"></div>
+                                    @else
+                                        <svg class="w-8 h-8 text-slate-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+                                    @endif
+                                </div>
+                                <div>
+                                    <h4 class="text-[13px] font-medium text-ink truncate" title="{{ $file['name'] }}">{{ $file['name'] }}</h4>
+                                    <p class="text-[10px] text-slate-400 mt-1">{{ round($file['size'] / 1024) }} KB</p>
+                                </div>
+                            </a>
+                            
+                            <form action="{{ route('admin.drive.delete') }}" method="POST" class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity" onsubmit="return confirm('Hapus file ini secara permanen?');">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="file_path" value="{{ $file['path'] }}">
+                                <button type="submit" class="bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600 transition-colors shadow-sm" title="Hapus File">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </form>
+                        </div>
                     @endforeach
                 </div>
             @endif

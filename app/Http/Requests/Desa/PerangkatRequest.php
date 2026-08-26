@@ -27,6 +27,7 @@ class PerangkatRequest extends FormRequest
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'no_sk_terakhir' => 'nullable|string|max:255',
+            'file_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
             'tgl_mulai_jabatan' => 'nullable|date',
         ];
     }

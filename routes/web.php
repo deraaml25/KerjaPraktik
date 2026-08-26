@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAjuanController;
+use App\Http\Controllers\Admin\AkunDesaController;
 use App\Http\Controllers\Admin\AjuanBpdController;
 use App\Http\Controllers\Admin\AjuanController;
 use App\Http\Controllers\Admin\ArsipRekomController;
@@ -8,16 +9,12 @@ use App\Http\Controllers\Admin\BimtekInformasiController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DriveController;
-use App\Http\Controllers\Admin\IzinCalonController;
 use App\Http\Controllers\Admin\MasterDataController;
-use App\Http\Controllers\Admin\PenataanController;
 use App\Http\Controllers\Admin\PengajuanPembinaanController;
 use App\Http\Controllers\Admin\PerangkatController;
-use App\Http\Controllers\Admin\PilkadesController;
 use App\Http\Controllers\Admin\PjKadesController;
 use App\Http\Controllers\Admin\RegulasiController;
 use App\Http\Controllers\Admin\RencanaP3dController;
-use App\Http\Controllers\Admin\SiltapController;
 use App\Http\Controllers\Admin\VerifikasiBpdController;
 use App\Http\Controllers\Admin\VerifikasiPerangkatController;
 use App\Http\Controllers\Desa\ArsipController;
@@ -66,6 +63,7 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::get('/drive', [DriveController::class, 'index'])->name('drive.index');
     Route::post('/drive/upload', [DriveController::class, 'upload'])->name('drive.upload');
     Route::get('/drive/download-zip', [DriveController::class, 'downloadZip'])->name('drive.download-zip');
+    Route::delete('/drive/delete', [DriveController::class, 'delete'])->name('drive.delete');
 
     // Modul 1: e-Regulasi (Admin)
     Route::get('/regulasi', [RegulasiController::class, 'index'])->name('regulasi.index');
@@ -88,13 +86,6 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::get('/pengajuan-pembinaan/{pengajuanPembinaan}', [PengajuanPembinaanController::class, 'show'])->name('pengajuan-pembinaan.show');
     Route::post('/pengajuan-pembinaan/{pengajuanPembinaan}/balas', [PengajuanPembinaanController::class, 'balas'])->name('pengajuan-pembinaan.balas');
     Route::delete('/pengajuan-pembinaan/{pengajuanPembinaan}', [PengajuanPembinaanController::class, 'destroy'])->name('pengajuan-pembinaan.destroy');
-
-    // Modul 4: e-Siltap (Admin)
-    Route::get('/siltap', [SiltapController::class, 'index'])->name('siltap.index');
-    Route::get('/siltap/{siltap}', [SiltapController::class, 'show'])->name('siltap.show');
-    Route::post('/siltap/{siltap}/verifikasi', [SiltapController::class, 'verifikasi'])->name('siltap.verifikasi');
-    Route::post('/siltap/{siltap}/kirim-bkad', [SiltapController::class, 'kirimBkad'])->name('siltap.kirim-bkad');
-
     // Modul 5: e-Pj Kades (Admin)
     Route::get('/pjkades', [PjKadesController::class, 'index'])->name('pjkades.index');
     Route::get('/pjkades/{pjkades}', [PjKadesController::class, 'show'])->name('pjkades.show');
@@ -105,24 +96,6 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::post('/pjkades/{pjkades}/update-catatan', [PjKadesController::class, 'updateCatatanAdmin'])->name('pjkades.update-catatan');
     Route::post('/pjkades/{pjkades}/disposisi', [PjKadesController::class, 'updateDisposisi'])->name('pjkades.disposisi');
     Route::delete('/pjkades/{pjkades}', [PjKadesController::class, 'destroy'])->name('pjkades.destroy');
-
-    // Modul 6: e-Izin Calon (Admin)
-    Route::get('/izincalon', [IzinCalonController::class, 'index'])->name('izincalon.index');
-    Route::get('/izincalon/{izincalon}', [IzinCalonController::class, 'show'])->name('izincalon.show');
-    Route::post('/izincalon/{izincalon}/verifikasi', [IzinCalonController::class, 'verifikasi'])->name('izincalon.verifikasi');
-
-    // Modul 7: e-Pilkades (Admin)
-    Route::get('/pilkades', [PilkadesController::class, 'index'])->name('pilkades.index');
-    Route::get('/pilkades/{pilkades}', [PilkadesController::class, 'show'])->name('pilkades.show');
-    Route::post('/pilkades/create', [PilkadesController::class, 'store'])->name('pilkades.store');
-    Route::post('/pilkades/{pilkades}/generate-sk', [PilkadesController::class, 'generateSk'])->name('pilkades.generate-sk');
-
-    // Modul 8: e-Penataan Desa (Admin)
-    Route::get('/penataan', [PenataanController::class, 'index'])->name('penataan.index');
-    Route::get('/penataan/{penataan}', [PenataanController::class, 'show'])->name('penataan.show');
-    Route::post('/penataan/{penataan}/set-persiapan', [PenataanController::class, 'setPersiapan'])->name('penataan.set_persiapan');
-    Route::post('/penataan/{penataan}/set-definitif', [PenataanController::class, 'setDefinitif'])->name('penataan.set_definitif');
-
     // Modul 9: Rencana P3D (Admin)
     Route::get('/rencana-p3d', [RencanaP3dController::class, 'index'])->name('rencana-p3d.index');
     Route::get('/rencana-p3d/export/csv', [RencanaP3dController::class, 'exportCsv'])->name('rencana-p3d.export-csv');
@@ -176,13 +149,6 @@ Route::middleware(['auth', 'role:desa'])->prefix('desa')->name('desa.')->group(f
     Route::post('/pengajuan-pembinaan', [App\Http\Controllers\Desa\PengajuanPembinaanController::class, 'store'])->name('pengajuan-pembinaan.store');
     Route::get('/pengajuan-pembinaan/{pengajuanPembinaan}', [App\Http\Controllers\Desa\PengajuanPembinaanController::class, 'show'])->name('pengajuan-pembinaan.show');
     Route::delete('/pengajuan-pembinaan/{pengajuanPembinaan}', [App\Http\Controllers\Desa\PengajuanPembinaanController::class, 'destroy'])->name('pengajuan-pembinaan.destroy');
-
-    // Modul 4: e-Siltap (Desa)
-    Route::get('/siltap', [App\Http\Controllers\Desa\SiltapController::class, 'index'])->name('siltap.index');
-    Route::get('/siltap/buat', [App\Http\Controllers\Desa\SiltapController::class, 'create'])->name('siltap.create');
-    Route::post('/siltap', [App\Http\Controllers\Desa\SiltapController::class, 'store'])->name('siltap.store');
-    Route::get('/siltap/{siltap}', [App\Http\Controllers\Desa\SiltapController::class, 'show'])->name('siltap.show');
-
     // Modul 5: e-Pj Kades (Desa)
     Route::get('/pjkades', [App\Http\Controllers\Desa\PjKadesController::class, 'index'])->name('pjkades.index');
     Route::get('/pjkades/buat', [App\Http\Controllers\Desa\PjKadesController::class, 'create'])->name('pjkades.create');
@@ -192,22 +158,6 @@ Route::middleware(['auth', 'role:desa'])->prefix('desa')->name('desa.')->group(f
     Route::post('/pjkades/{pjkades}/bulk-upload', [App\Http\Controllers\Desa\PjKadesController::class, 'bulkUpload'])->name('pjkades.bulkUpload');
     Route::post('/pjkades/{pjkades}/submit', [App\Http\Controllers\Desa\PjKadesController::class, 'submitUsulan'])->name('pjkades.submit');
     Route::delete('/pjkades/{pjkades}', [App\Http\Controllers\Desa\PjKadesController::class, 'destroy'])->name('pjkades.destroy');
-
-    // Modul 6: e-Izin Calon (Desa)
-    Route::get('/izincalon', [App\Http\Controllers\Desa\IzinCalonController::class, 'index'])->name('izincalon.index');
-    Route::get('/izincalon/buat', [App\Http\Controllers\Desa\IzinCalonController::class, 'create'])->name('izincalon.create');
-    Route::post('/izincalon', [App\Http\Controllers\Desa\IzinCalonController::class, 'store'])->name('izincalon.store');
-
-    // Modul 7: e-Pilkades (Desa)
-    Route::get('/pilkades', [App\Http\Controllers\Desa\PilkadesController::class, 'index'])->name('pilkades.index');
-    Route::get('/pilkades/{pilkades}', [App\Http\Controllers\Desa\PilkadesController::class, 'show'])->name('pilkades.show');
-    Route::post('/pilkades/{pilkades}/suara', [App\Http\Controllers\Desa\PilkadesController::class, 'storeSuara'])->name('pilkades.store-suara');
-
-    // Modul 8: e-Penataan Desa (Desa)
-    Route::get('/penataan', [App\Http\Controllers\Desa\PenataanController::class, 'index'])->name('penataan.index');
-    Route::get('/penataan/buat', [App\Http\Controllers\Desa\PenataanController::class, 'create'])->name('penataan.create');
-    Route::post('/penataan', [App\Http\Controllers\Desa\PenataanController::class, 'store'])->name('penataan.store');
-
     // Modul 9: Rencana P3D (Desa)
     Route::get('/rencana-p3d', [App\Http\Controllers\Desa\RencanaP3dController::class, 'index'])->name('rencana-p3d.index');
     Route::get('/rencana-p3d/buat', [App\Http\Controllers\Desa\RencanaP3dController::class, 'create'])->name('rencana-p3d.create');
@@ -235,6 +185,10 @@ Route::middleware(['auth', 'role:desa'])->prefix('desa')->name('desa.')->group(f
 Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Manajemen Akun Desa
+    Route::get('/akun-desa', [AkunDesaController::class, 'index'])->name('akun_desa.index');
+    Route::patch('/akun-desa/{user}/password', [AkunDesaController::class, 'updatePassword'])->name('akun_desa.update_password');
+
     // Modul e-Rekomendasi (Admin Verification)
     Route::get('/ajuan', [AdminAjuanController::class, 'index'])->name('ajuan.index');
     Route::get('/ajuan/{ajuan}', [AdminAjuanController::class, 'show'])->name('ajuan.show');
@@ -260,10 +214,7 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
     Route::post('/ajuan-bpd/{ajuanBpd}/verify-checklist/{checklist}', [AjuanBpdController::class, 'verifyChecklist'])->name('ajuan-bpd.verify-checklist');
     Route::post('/ajuan-bpd/{ajuanBpd}/catatan', [AjuanBpdController::class, 'updateCatatanAdmin'])->name('ajuan-bpd.catatan');
     Route::post('/ajuan-bpd/{ajuanBpd}/disposisi', [AjuanBpdController::class, 'updateDisposisi'])->name('ajuan-bpd.disposisi');
-    Route::delete('/ajuan-bpd/{ajuanBpd}', [AjuanBpdController::class, 'destroy'])->name('ajuan-bpd.destroy');
-
-    Route::get('/penataan', [PenataanController::class, 'index'])->name('penataan.index');
-});
+    Route::delete('/ajuan-bpd/{ajuanBpd}', [AjuanBpdController::class, 'destroy'])->name('ajuan-bpd.destroy');});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

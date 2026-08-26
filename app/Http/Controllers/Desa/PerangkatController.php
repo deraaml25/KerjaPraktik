@@ -47,10 +47,14 @@ class PerangkatController extends Controller
     {
         $validated = $request->validated();
 
-        // Mencegah manipulasi desa_id, dipaksa sesuai auth desa
         $validated['desa_id'] = auth()->user()->desa_id;
         $validated['status_aktif'] = false;
         $validated['status_verifikasi'] = 'pending_tambah';
+
+        if ($request->hasFile('file_sk')) {
+            $path = $request->file('file_sk')->store('perangkat_sk', 'public');
+            $validated['file_sk'] = $path;
+        }
 
         PerangkatDesa::create($validated);
 
@@ -71,14 +75,25 @@ class PerangkatController extends Controller
 
         // Hanya update field administratif.
         // Kita tidak memperbarui desa_id atau id
+        
+        $draft = [
+            'nama' => $validated['nama'],
+            'jabatan' => $validated['jabatan'],
+            'no_sk_terakhir' => $validated['no_sk_terakhir'],
+            'tgl_mulai_jabatan' => $validated['tgl_mulai_jabatan'],
+        ];
+
+        if ($request->hasFile('file_sk')) {
+            $path = $request->file('file_sk')->store('perangkat_sk', 'public');
+            $draft['file_sk'] = $path;
+        } elseif ($perangkat->file_sk) {
+            // Keep the old file_sk in draft so it is remembered if not uploaded new
+            $draft['file_sk'] = $perangkat->file_sk;
+        }
+
         $perangkat->update([
             'status_verifikasi' => 'pending_ubah',
-            'draft_perubahan' => [
-                'nama' => $validated['nama'],
-                'jabatan' => $validated['jabatan'],
-                'no_sk_terakhir' => $validated['no_sk_terakhir'],
-                'tgl_mulai_jabatan' => $validated['tgl_mulai_jabatan'],
-            ],
+            'draft_perubahan' => $draft,
         ]);
 
         return redirect()->route('desa.perangkat.index')

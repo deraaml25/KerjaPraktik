@@ -21,11 +21,17 @@ class VerifikasiPerangkatController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where('nama', 'like', "%{$search}%")
-                ->orWhere('jabatan', 'like', "%{$search}%")
-                ->orWhereHas('desa', function ($q) use ($search) {
-                    $q->where('nama_desa', 'like', "%{$search}%");
-                });
+            $query->where(function($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('jabatan', 'like', "%{$search}%")
+                  ->orWhereHas('desa', function ($qDesa) use ($search) {
+                      $qDesa->where('nama_desa', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status_aktif', $request->status);
         }
 
         $perangkats = $query->whereNotIn('status_verifikasi', ['pending_tambah'])
@@ -33,7 +39,12 @@ class VerifikasiPerangkatController extends Controller
             ->orderByRaw("CASE WHEN jabatan = 'Kepala Desa' THEN 0 ELSE 1 END")
             ->paginate(15, ['*'], 'perangkat_page');
 
-        return view('admin.verifikasi_perangkat.index', compact('pending', 'perangkats'));
+        $totalAktif = PerangkatDesa::whereNotIn('status_verifikasi', ['pending_tambah'])
+            ->where('status_aktif', true)->count();
+        $totalNonaktif = PerangkatDesa::whereNotIn('status_verifikasi', ['pending_tambah'])
+            ->where('status_aktif', false)->count();
+
+        return view('admin.verifikasi_perangkat.index', compact('pending', 'perangkats', 'totalAktif', 'totalNonaktif'));
     }
 
     public function approve(Request $request, $id)
@@ -50,6 +61,10 @@ class VerifikasiPerangkatController extends Controller
                 $perangkat->jabatan = $draft['jabatan'] ?? $perangkat->jabatan;
                 $perangkat->no_sk_terakhir = $draft['no_sk_terakhir'] ?? $perangkat->no_sk_terakhir;
                 $perangkat->tgl_mulai_jabatan = $draft['tgl_mulai_jabatan'] ?? $perangkat->tgl_mulai_jabatan;
+                
+                if (isset($draft['file_sk'])) {
+                    $perangkat->file_sk = $draft['file_sk'];
+                }
             }
             $perangkat->draft_perubahan = null;
             $perangkat->status_verifikasi = 'disetujui';

@@ -49,10 +49,19 @@
 
                 {{-- Rencana Pelaksanaan P3D --}}
                 <div>
-                    <label for="rencana_pelaksanaan" class="block text-sm font-bold text-ink mb-2">Rencana Pelaksanaan P3D <span class="text-red-500">*</span></label>
-                    <input type="date" name="rencana_pelaksanaan" id="rencana_pelaksanaan" required value="{{ old('rencana_pelaksanaan') }}"
-                        class="w-full text-sm rounded-md border-border text-ink bg-white focus:border-primary focus:ring-primary shadow-sm">
-                    <p class="text-xs text-muted mt-1">Pilih perkiraan tanggal pelaksanaan penjaringan dan penyaringan.</p>
+                    <label class="block text-sm font-bold text-ink mb-2">Rencana Pelaksanaan P3D <span class="text-red-500">*</span></label>
+                    <div class="flex items-center gap-2">
+                        <div class="w-full">
+                            <input type="date" name="rencana_pelaksanaan_mulai" id="rencana_pelaksanaan_mulai" required value="{{ old('rencana_pelaksanaan_mulai') }}"
+                                class="w-full text-sm rounded-md border-border text-ink bg-white focus:border-primary focus:ring-primary shadow-sm">
+                        </div>
+                        <span class="text-sm font-medium text-slate-500">s/d</span>
+                        <div class="w-full">
+                            <input type="date" name="rencana_pelaksanaan_selesai" id="rencana_pelaksanaan_selesai" required value="{{ old('rencana_pelaksanaan_selesai') }}"
+                                class="w-full text-sm rounded-md border-border text-ink bg-white focus:border-primary focus:ring-primary shadow-sm">
+                        </div>
+                    </div>
+                    <p class="text-xs text-muted mt-1">Pilih perkiraan range tanggal pelaksanaan penjaringan dan penyaringan.</p>
                 </div>
             </div>
 
