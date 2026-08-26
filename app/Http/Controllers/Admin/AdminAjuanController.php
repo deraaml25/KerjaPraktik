@@ -40,7 +40,7 @@ class AdminAjuanController extends Controller
         $dokumenList = $ajuan->checklistAjuans->sortBy('templateChecklist.urutan');
 
         $tahapAktif = match ($ajuan->posisi_surat) {
-            'Front Office (FO)' => 2,
+            'Pegawai' => 2,
             'Kabid PDPD' => 4,
             'Sekretaris Dinas' => 5,
             'Kepala Dinas' => 6,
@@ -53,7 +53,7 @@ class AdminAjuanController extends Controller
         };
 
         $nextPosisi = match ($ajuan->posisi_surat) {
-            'Front Office (FO)' => 'Kabid PDPD',
+            'Pegawai' => 'Kabid PDPD',
             'Kabid PDPD' => 'Sekretaris Dinas',
             'Sekretaris Dinas' => 'Kepala Dinas',
             'Kepala Dinas' => 'Asisten Setda / Sekda',
@@ -61,7 +61,7 @@ class AdminAjuanController extends Controller
             'Bupati' => 'TU Umum Setda',
             'TU Umum Setda' => 'Dinpermasdes',
             'Dinpermasdes' => 'Selesai (Surat Terbit)',
-            default => 'Front Office (FO)',
+            default => 'Pegawai',
         };
 
         return view('admin.ajuan.show', compact('ajuan', 'dokumenList', 'tahapAktif', 'nextPosisi'));
@@ -132,7 +132,7 @@ class AdminAjuanController extends Controller
         ]);
 
         $tahapLama = match ($ajuan->posisi_surat) {
-            'Front Office (FO)' => 2,
+            'Pegawai' => 2,
             'Kabid PDPD' => 4,
             'Sekretaris Dinas' => 5,
             'Kepala Dinas' => 6,
@@ -160,7 +160,7 @@ class AdminAjuanController extends Controller
         ]);
 
         $tahapBaru = match ($request->posisi_baru) {
-            'Front Office (FO)' => 2,
+            'Pegawai' => 2,
             'Kabid PDPD' => 4,
             'Sekretaris Dinas' => 5,
             'Kepala Dinas' => 6,
@@ -182,7 +182,9 @@ class AdminAjuanController extends Controller
             'updated_by' => auth()->id(),
         ]);
 
-        return back()->with('success', 'Sistem berhasil mendisposisikan ajuan ke '.$request->posisi_baru);
+        return back()
+            ->with('success', 'Ajuan berhasil diteruskan ke: ' . $request->posisi_baru)
+            ->with('posisi_baru', $request->posisi_baru);
     }
 
     /**

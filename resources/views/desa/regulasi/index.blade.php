@@ -19,18 +19,18 @@
                     <tr>
 
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">No. Regulasi</th>
+                            class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">No. Regulasi</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Judul /
+                            class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Judul /
                             Tipe</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Tanggal
+                            class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Tanggal
                             Diajukan</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted tracking-wider uppercase">Status
+                            class="px-6 py-3 text-left text-xs font-bold text-ink tracking-wider uppercase">Status
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                            class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-border">
@@ -39,29 +39,26 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-ink font-medium">
                                 {{ $reg->no_regulasi ?? '-' }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="text-sm font-medium text-ink font-display">{{ $reg->judul }}</div>
-                                <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-primary-soft text-primary mt-1 capitalize">{{ $reg->tipe }}</span>
+                                <div class="text-xs font-bold text-blue-700 mt-1 capitalize">{{ $reg->tipe }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-muted">
-                                {{ $reg->tgl_diajukan ? $reg->tgl_diajukan->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-muted">
+                                {{ $reg->tgl_diajukan ? $reg->tgl_diajukan->format('d/m/y') : '-' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($reg->status === 'disahkan')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Disahkan</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-green-100 text-green-800" style="width: 170px;">DISAHKAN</span>
                                 @elseif($reg->status === 'perlu_revisi')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Perlu
-                                        Revisi</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-red-100 text-red-800" style="width: 170px;">PERLU REVISI</span>
                                 @elseif($reg->status === 'disetujui')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Siap Disahkan</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-emerald-100 text-emerald-800" style="width: 170px;">SIAP DISAHKAN</span>
                                 @else
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Menunggu
-                                        Verifikasi</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-blue-100 text-blue-800" style="width: 170px;">MENUNGGU VERIFIKASI</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">

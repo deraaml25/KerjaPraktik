@@ -30,20 +30,20 @@
             <table class="min-w-full divide-y divide-border">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">No. Registrasi / Tanggal</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Jenis Pemberhentian & Alasan</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Pengganti (Pj / Plt Kades)</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Kelengkapan Dokumen</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">No. Registrasi / Tanggal</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Jenis Pemberhentian & Alasan</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Pengganti (Pj / Plt Kades)</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Kelengkapan Dokumen</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-border">
                     @forelse ($pjkades as $pj)
                         <tr class="hover:bg-gray-50 transition-colors group">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-ink font-mono">{{ $pj->no_registrasi ?? ('SKK-' . $pj->id) }}</div>
-                                <div class="text-xs text-muted mt-0.5">{{ $pj->tgl_diajukan ? $pj->tgl_diajukan->format('d M Y') : $pj->created_at->format('d M Y') }}</div>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <div class="text-sm font-semibold text-ink font-mono text-center">{{ $pj->no_registrasi ?? ('SKK-' . $pj->id) }}</div>
+                                <div class="text-xs text-muted mt-0.5 text-center">{{ $pj->tgl_diajukan ? $pj->tgl_diajukan->format('d/m/y') : $pj->created_at->format('d/m/y') }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($pj->kategori === 'plt_kades')

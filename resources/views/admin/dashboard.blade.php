@@ -135,10 +135,10 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr>
-                            <th class="px-6 py-4 text-xs font-bold text-slate-500 bg-slate-50 text-center">Dokumen</th>
-                            <th class="px-6 py-4 text-xs font-bold text-slate-500 bg-slate-50 text-center">Status</th>
-                            <th class="px-6 py-4 text-xs font-bold text-slate-500 bg-slate-50 text-center">Asal Desa</th>
-                            <th class="px-6 py-4 text-xs font-bold text-slate-500 bg-slate-50 text-center">Tanggal Update</th>
+                            <th class="px-6 py-4 text-xs font-bold text-ink bg-slate-50 text-center">Dokumen</th>
+                            <th class="px-6 py-4 text-xs font-bold text-ink bg-slate-50 text-center">Status</th>
+                            <th class="px-6 py-4 text-xs font-bold text-ink bg-slate-50 text-center">Asal Desa</th>
+                            <th class="px-6 py-4 text-xs font-bold text-ink bg-slate-50 text-center">Tanggal Update</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -150,8 +150,19 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="whitespace-nowrap bg-slate-100 text-slate-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                                    {{ str_replace('_', ' ', $act->status) }}
+                                @php
+                                    $statusUpper = strtoupper(str_replace('_', ' ', $act->status));
+                                    $statusColor = match($statusUpper) {
+                                        'DIREVISI', 'REVISI' => 'bg-red-100 text-red-800',
+                                        'SUBMITTED' => 'bg-blue-100 text-blue-800',
+                                        'DISETUJUI', 'SELESAI' => 'bg-green-100 text-green-800',
+                                        'PERLU VERIFIKASI', 'MENUNGGU VERIFIKASI' => 'bg-yellow-100 text-yellow-800',
+                                        'DIPROSES', 'PROSES' => 'bg-green-100 text-green-800',
+                                        default => 'bg-gray-100 text-gray-800'
+                                    };
+                                @endphp
+                                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider {{ $statusColor }}" style="width: 140px;">
+                                    {{ $statusUpper }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-600 text-center">{{ ucwords(strtolower($act->admin)) }}</td>
@@ -170,14 +181,34 @@
         <!-- Right Column Widgets -->
         <div class="flex flex-col gap-6 md:col-span-1">
             <!-- Widget 1: Informasi Wilayah -->
-            <div class="rounded-2xl overflow-hidden relative shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                <div class="absolute inset-0 bg-black/40"></div>
-                <div class="relative p-6 h-full flex flex-col justify-end min-h-[180px]">
-                    <h3 class="text-xl font-bold text-white mb-2">Informasi Wilayah</h3>
-                    <p class="text-white/80 text-sm mb-4">Data spasial dan demografi desa terbaru.</p>
-                    <a href="https://maps.app.goo.gl/jFDWxg1pKXNHyZz78" target="_blank" class="bg-white text-slate-900 text-sm font-bold py-2.5 rounded-lg w-full hover:bg-slate-50 transition-colors text-center block">
-                        Buka Peta Desa
-                    </a>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="px-5 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                    <h3 class="font-display font-bold text-slate-900 text-sm">Peta Wilayah</h3>
+                    <a href="https://maps.app.goo.gl/jFDWxg1pKXNHyZz78" target="_blank" class="text-xs text-blue-600 font-medium hover:underline">Buka Penuh</a>
+                </div>
+                <div class="w-full h-48 bg-slate-100 relative">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=Kabupaten+Banyumas&t=k&z=11&ie=UTF8&iwloc=&output=embed"
+                        class="absolute inset-0"
+                    ></iframe>
+                </div>
+                <div class="p-4 bg-white">
+                    <div class="flex items-start gap-2">
+                        <svg class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Dinpermasdes</p>
+                            <p class="text-xs text-slate-500">Kabupaten Banyumas</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

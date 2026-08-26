@@ -3,8 +3,8 @@
 
     <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
         <a href="{{ route('admin.ajuan-bpd.index') }}"
-            class="inline-flex items-center text-sm font-medium text-muted hover:text-ink">
-            <svg class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Kembali ke Daftar Antrean
@@ -15,14 +15,23 @@
     </div>
 
     @if(session('success'))
-        <div
-            class="mb-5 p-4 rounded-card bg-green-50 border border-green-200 text-green-800 flex items-start gap-3 shadow-sm">
-            <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-medium">{{ session('success') }}</span>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const posisi = '{{ session("posisi_baru") }}';
+                const isRevisi = posisi === 'Pegawai';
+
+                Swal.fire({
+                    icon: isRevisi ? 'warning' : 'success',
+                    title: isRevisi ? 'Dikembalikan untuk Revisi' : (posisi ? posisi : 'Berhasil!'),
+                    text: '{{ session("success") }}',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     <div class="{{ $ajuanBpd->metode !== 'offline' ? 'grid grid-cols-1 lg:grid-cols-12 gap-6' : 'max-w-4xl mx-auto' }} h-[80vh]">
@@ -34,20 +43,10 @@
             <div class="px-4 py-3 border-b border-border bg-gray-50 flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-ink">Berkas Keseluruhan Persyaratan</p>
-                    <p class="text-xs text-muted">Ajuan BPD ({{ ucfirst($ajuanBpd->jenis_ajuan) }}) — {{ $ajuanBpd->desa->nama_desa }}</p>
                 </div>
                 @if($ajuanBpd->berkas_zip)
                     <div class="flex gap-2">
-                        @if(preg_match('/\.(pdf|jpe?g|png)$/i', $ajuanBpd->berkas_zip))
-                            <button type="button" onclick="previewFile('{{ Storage::disk('public')->url($ajuanBpd->berkas_zip) }}', 'Berkas Keseluruhan (ZIP/PDF)')"
-                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 text-xs font-medium rounded hover:bg-blue-200 transition-colors flex-shrink-0">
-                                <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                                Lihat
-                            </button>
-                        @endif
+
                         <a href="{{ Storage::disk('public')->url($ajuanBpd->berkas_zip) }}" target="_blank"
                             class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0">
                             <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -109,7 +108,7 @@
             </div>
 
             {{-- LIST DOKUMEN CHECKLIST --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Verifikasi Syarat</h3>
                     <a href="{{ route('admin.ajuan-bpd.print-syarat', $ajuanBpd->id) }}" target="_blank" class="inline-flex items-center text-xs px-2 py-1 bg-white border border-gray-300 rounded font-medium text-ink hover:bg-gray-50 transition-colors shadow-sm">
@@ -133,10 +132,6 @@
                                             <button
                                                 onclick="previewFile('{{ Storage::disk('public')->url($item->file_path) }}', '{{ addslashes($item->templateChecklist->nama_dokumen) }}')"
                                                 class="ml-2 inline-flex items-center text-xs px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
-                                                <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
                                                 Lihat Berkas
                                             </button>
                                         @elseif(!$ajuanBpd->berkas_zip)
@@ -162,7 +157,7 @@
             </div>
 
             {{-- PANEL CATATAN ADMIN --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2 overflow-hidden">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Catatan Perbaikan Desa</h3>
                 </div>
@@ -329,3 +324,4 @@
         </style>
     @endpush
 </x-app-layout>
+

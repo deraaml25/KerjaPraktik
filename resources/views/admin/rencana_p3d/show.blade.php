@@ -7,15 +7,21 @@
         </a>
     @endsection
 
-    @if(session('success'))
-        <div class="p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 text-sm mb-6 font-medium">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="p-4 bg-red-50 text-red-800 rounded-lg border border-red-200 text-sm mb-6 font-medium">
-            {{ session('error') }}
-        </div>
+    @if(session('success') || session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: '{{ session('success') ? "success" : "error" }}',
+                    title: '{{ session('success') ? "Berhasil!" : "Gagal!" }}',
+                    text: '{{ session('success') ?? session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -24,7 +30,7 @@
             <div class="bg-white rounded-card shadow-sm border border-border overflow-hidden">
                 <div class="px-6 py-4 border-b border-border bg-gray-50 flex items-center justify-between">
                     <h3 class="text-base font-bold text-ink">Informasi Rencana P3D</h3>
-                    <span class="text-xs font-medium text-muted">Dikirim: {{ $rencana->created_at->format('d M Y H:i') }}</span>
+                    <span class="text-xs font-medium text-muted">Dikirim: {{ $rencana->created_at->format('d/m/y H:i') }}</span>
                 </div>
                 
                 <div class="p-6">
@@ -130,3 +136,4 @@
         </div>
     </div>
 </x-app-layout>
+

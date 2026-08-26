@@ -118,7 +118,7 @@
                     
                     <div class="text-sm" style="color: #0f172a;">
                         <p class="mb-1"><span class="opacity-70">Layanan:</span> Evaluasi Hukum ({{ ucfirst($regulasi->tipe) }})</p>
-                        <p class="mb-1"><span class="opacity-70">Tanggal:</span> {{ $regulasi->tgl_diajukan ? $regulasi->tgl_diajukan->format('d M Y') : '-' }}</p>
+                        <p class="mb-1"><span class="opacity-70">Tanggal:</span> {{ $regulasi->tgl_diajukan ? $regulasi->tgl_diajukan->format('d/m/y') : '-' }}</p>
                     </div>
 
                     <div class="mt-4 pt-4 border-t border-blue-200">

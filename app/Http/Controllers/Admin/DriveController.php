@@ -155,7 +155,7 @@ class DriveController extends Controller
                         $pjKadesChecklists = ChecklistPjKades::whereNotNull('file_path')->whereHas('pjKades', function ($q) use ($desa) {
                             $q->where('desa_id', $desa->id)
                                 ->where('status', '!=', 'draft')
-                                ->whereNotIn('posisi_surat', ['Front Office (FO)', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])
+                                ->whereNotIn('posisi_surat', ['Pegawai', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])
                                 ->whereNotNull('posisi_surat');
                         })->get();
                         foreach ($pjKadesChecklists as $chk) {
@@ -163,7 +163,7 @@ class DriveController extends Controller
                         }
 
                         $pjs = PjKades::whereNotNull('berkas_zip')->where('desa_id', $desa->id)->where('status', '!=', 'draft')
-                            ->whereNotIn('posisi_surat', ['Front Office (FO)', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->get();
+                            ->whereNotIn('posisi_surat', ['Pegawai', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->get();
                         foreach ($pjs as $pj) {
                             $files[] = ['name' => '[SK-Kades_ZIP] '.basename($pj->berkas_zip), 'path' => $pj->berkas_zip, 'size' => Storage::disk('public')->exists($pj->berkas_zip) ? Storage::disk('public')->size($pj->berkas_zip) : 0, 'url' => Storage::disk('public')->url($pj->berkas_zip)];
                         }
@@ -384,11 +384,11 @@ class DriveController extends Controller
             if ($jenis === 'penunjukan' || $jenis === null) {
                 $count += ChecklistPjKades::whereNotNull('file_path')->whereHas('pjKades', function ($q) use ($desaId) {
                     $q->where('desa_id', $desaId)->where('status', '!=', 'draft')
-                        ->whereNotIn('posisi_surat', ['Front Office (FO)', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])
+                        ->whereNotIn('posisi_surat', ['Pegawai', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])
                         ->whereNotNull('posisi_surat');
                 })->count();
                 $count += PjKades::whereNotNull('berkas_zip')->where('desa_id', $desaId)->where('status', '!=', 'draft')
-                    ->whereNotIn('posisi_surat', ['Front Office (FO)', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->count();
+                    ->whereNotIn('posisi_surat', ['Pegawai', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->count();
             }
         } elseif ($module === 'perangkat_desa') {
             $mapJenis = ['pengangkatan' => 1, 'rotasi' => 2, 'pemberhentian' => 3];
@@ -458,7 +458,7 @@ class DriveController extends Controller
                 }
                 if ($jenis === 'penunjukan' || $jenis === null) {
                     $pjs = PjKades::where('desa_id', $desaId)->where('status', '!=', 'draft')
-                        ->whereNotIn('posisi_surat', ['Front Office (FO)', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->get();
+                        ->whereNotIn('posisi_surat', ['Pegawai', 'Berkas Diterima', 'Verifikasi & Validasi Petugas'])->whereNotNull('posisi_surat')->get();
                     foreach ($pjs as $pj) {
                         if ($pj->berkas_zip) {
                             $files[] = ['real_path' => Storage::disk('public')->path($pj->berkas_zip), 'relative_name' => 'Kades/Penunjukan/[SK-Kades_ZIP] '.basename($pj->berkas_zip)];

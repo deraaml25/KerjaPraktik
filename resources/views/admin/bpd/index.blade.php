@@ -24,7 +24,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($bpds as $p)
-                <div class="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 flex flex-col hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] transition-shadow border border-slate-100">
+                <div x-data="{}" x-on:click="$dispatch('open-modal', 'detail-{{ $p->id }}')" class="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] p-6 flex flex-col hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] transition-shadow border border-slate-100 cursor-pointer">
                     <div class="flex justify-between items-start mb-8">
                         <div class="w-[72px] h-[72px] rounded-full bg-slate-200 flex flex-shrink-0 items-center justify-center overflow-hidden">
                             <svg class="w-12 h-12 text-slate-400 mt-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -46,6 +46,51 @@
                         <p class="text-[14px] text-slate-600">{{ $p->desa->nama_desa ?? 'Desa' }}, {{ $p->desa->kecamatan->nama_kecamatan ?? 'Kecamatan' }}</p>
                     </div>
                 </div>
+
+                <x-modal name="detail-{{ $p->id }}" :show="false" maxWidth="sm" focusable>
+                    <div class="p-6">
+                        <h2 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Detail BPD</h2>
+                        
+                        <div class="divide-y divide-gray-100 border-t border-b border-gray-100">
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Nama</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->nama }}</div>
+                            </div>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Jabatan</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->jabatan }}</div>
+                            </div>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Desa / Kec.</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->desa->nama_desa ?? 'Desa' }} / {{ $p->desa->kecamatan->nama_kecamatan ?? 'Kecamatan' }}</div>
+                            </div>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Mulai Jabatan</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->tgl_mulai_jabatan ? $p->tgl_mulai_jabatan->format('d/m/Y') : '-' }}</div>
+                            </div>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">No. SK</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->no_sk_terakhir ?? '-' }}</div>
+                            </div>
+                            <div class="py-3 grid grid-cols-3 gap-4 items-center">
+                                <div class="text-sm font-medium text-gray-500">File SK</div>
+                                <div class="col-span-2">
+                                    @if($p->file_sk)
+                                        <a href="{{ asset('storage/' . $p->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 text-xs text-primary font-bold hover:underline bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100 transition-colors hover:bg-blue-100">
+                                            <span class="material-symbols-outlined text-[16px]">description</span> Lihat File
+                                        </a>
+                                    @else
+                                        <span class="text-sm font-semibold text-gray-900">-</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-end">
+                            <button type="button" x-on:click="$dispatch('close')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200">Tutup</button>
+                        </div>
+                    </div>
+                </x-modal>
             @empty
                 <div class="col-span-full">
                     <div class="bg-white rounded-card shadow-sm border border-border p-8">

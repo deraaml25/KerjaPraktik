@@ -15,7 +15,7 @@ return new class extends Migration
             $table->enum('metode', ['online', 'offline'])->default('online')->after('status');
             $table->string('berkas_zip')->nullable()->after('metode');
             $table->text('catatan_admin')->nullable()->after('berkas_zip');
-            $table->string('posisi_surat')->nullable()->default('Front Office (FO)')->after('catatan_admin');
+            $table->string('posisi_surat')->nullable()->default('Pegawai')->after('catatan_admin');
         });
     }
 

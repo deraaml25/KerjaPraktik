@@ -38,17 +38,21 @@
     </div>
 
     <!-- Alert Messages -->
-    @if(session('success'))
-        <div class="mb-6 p-4 rounded-card bg-green-50 border border-green-200 text-green-700 flex items-start">
-            <svg class="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            <div>{{ session('success') }}</div>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="mb-6 p-4 rounded-card bg-red-50 border border-red-200 text-red-700 flex items-start">
-            <svg class="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <div>{{ session('error') }}</div>
-        </div>
+    @if(session('success') || session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: '{{ session('success') ? "success" : "error" }}',
+                    title: '{{ session('success') ? "Berhasil!" : "Gagal!" }}',
+                    text: '{{ session('success') ?? session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
     @if($errors->any())
         <div class="mb-6 p-4 rounded-card bg-red-50 border border-red-200 text-red-700 flex items-start">
@@ -147,3 +151,4 @@
         @endif
     </div>
 </x-app-layout>
+

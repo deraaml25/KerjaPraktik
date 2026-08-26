@@ -124,7 +124,9 @@ class PjKadesController extends Controller
 
         $pjkades->update($updateData);
 
-        return back()->with('success', "Posisi surat berhasil diperbarui ke: {$request->posisi_surat}");
+        return back()
+            ->with('success', "Ajuan berhasil diteruskan ke: {$request->posisi_surat}")
+            ->with('posisi_baru', $request->posisi_surat);
     }
 
     /**

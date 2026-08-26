@@ -43,6 +43,11 @@ class BpdController extends Controller
         $validated['status_aktif'] = false;
         $validated['status_verifikasi'] = 'pending_tambah';
 
+        if ($request->hasFile('file_sk')) {
+            $path = $request->file('file_sk')->store('bpd_sk', 'public');
+            $validated['file_sk'] = $path;
+        }
+
         Bpd::create($validated);
 
         return redirect()->route('desa.bpd.index')
@@ -57,14 +62,23 @@ class BpdController extends Controller
     public function update(BpdRequest $request, Bpd $bpd)
     {
         $validated = $request->validated();
+        $draft = [
+            'nama' => $validated['nama'],
+            'jabatan' => $validated['jabatan'],
+            'no_sk_terakhir' => $validated['no_sk_terakhir'],
+            'tgl_mulai_jabatan' => $validated['tgl_mulai_jabatan'],
+        ];
+
+        if ($request->hasFile('file_sk')) {
+            $path = $request->file('file_sk')->store('bpd_sk', 'public');
+            $draft['file_sk'] = $path;
+        } elseif ($bpd->file_sk) {
+            $draft['file_sk'] = $bpd->file_sk;
+        }
+
         $bpd->update([
             'status_verifikasi' => 'pending_ubah',
-            'draft_perubahan' => [
-                'nama' => $validated['nama'],
-                'jabatan' => $validated['jabatan'],
-                'no_sk_terakhir' => $validated['no_sk_terakhir'],
-                'tgl_mulai_jabatan' => $validated['tgl_mulai_jabatan'],
-            ],
+            'draft_perubahan' => $draft,
         ]);
 
         return redirect()->route('desa.bpd.index')

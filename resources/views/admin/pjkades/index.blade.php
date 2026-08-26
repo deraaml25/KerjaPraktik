@@ -1,16 +1,21 @@
 <x-app-layout>
     @section('title', 'SK Pemberhentian Kades & Pengangkatan Pj/Plt Kades')
 
-    @if(session('success'))
-        <div class="p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 text-sm mb-6 font-medium">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="p-4 bg-red-50 text-red-800 rounded-lg border border-red-200 text-sm mb-6 font-medium">
-            {{ session('error') }}
-        </div>
+    @if(session('success') || session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: '{{ session('success') ? "success" : "error" }}',
+                    title: '{{ session('success') ? "Berhasil!" : "Gagal!" }}',
+                    text: '{{ session('success') ?? session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     {{-- Alert Masa Jabatan Hampir Berakhir --}}
@@ -34,12 +39,12 @@
             <table class="min-w-full divide-y divide-border">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Kecamatan / Desa</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Jenis Pemberhentian & Alasan</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Pengganti (Pj / Plt Kades)</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Verifikasi Berkas</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Kecamatan / Desa</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Jenis Pemberhentian & Alasan</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Pengganti (Pj / Plt Kades)</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Verifikasi Berkas</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-border">
@@ -47,9 +52,9 @@
                         <tr class="hover:bg-gray-50/50 {{ $pj->status === 'approved' && $pj->hampir_berakhir ? 'bg-red-50/30' : '' }}">
                             <td class="px-6 py-4 whitespace-nowrap text-left">
                                 <div class="text-sm font-bold text-ink">Desa {{ $pj->desa->nama_desa }}</div>
-                                <div class="text-xs text-muted">Kec. {{ $pj->desa->kecamatan->nama_kecamatan ?? '-' }}</div>
+                                <div class="text-xs text-blue-700 font-bold">Kec. {{ $pj->desa->kecamatan->nama_kecamatan ?? '-' }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-left">
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
                                 @if($pj->kategori === 'plt_kades')
                                     <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-indigo-100 text-indigo-800">
                                         Pemberhentian Sementara / Cuti
@@ -59,7 +64,7 @@
                                         Pemberhentian
                                     </span>
                                 @endif
-                                <div class="text-xs text-ink mt-1 font-medium">Alasan: <strong>{{ $pj->alasan_nama ?? ($pj->alasanPemberhentian->nama ?? '-') }}</strong></div>
+                                <div class="text-xs text-ink mt-1 font-medium"><strong>{{ $pj->alasan_nama ?? ($pj->alasanPemberhentian->nama ?? '-') }}</strong></div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-left">
                                 @if($pj->kategori === 'plt_kades')
@@ -71,39 +76,42 @@
                                     <div class="text-xs text-muted font-mono">NIP. {{ $pj->nip ?? '-' }}</div>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-left">
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
                                 @php
                                     $totalChecklist = $pj->checklists->count();
                                     $uploadedChecklist = $pj->checklists->whereNotNull('file_path')->count();
                                     $approvedChecklist = $pj->checklists->where('status_verifikasi', 'valid')->count();
                                 @endphp
                                 <div class="text-xs font-bold text-ink">{{ $approvedChecklist }}/{{ $totalChecklist }} Disetujui</div>
-                                <div class="text-xs text-muted">{{ $uploadedChecklist }} Berkas Diunggah</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
-                                @if($pj->status === 'approved')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Approved / SK Bupati Terbit
+                                @if($pj->status === 'submitted')
+                                    <span style="width: 130px;" class="inline-flex justify-center items-center px-3 py-1 rounded-full text-[11px] font-bold bg-yellow-100 text-yellow-800 tracking-wider">
+                                        PERLU VERIFIKASI
+                                    </span>
+                                @elseif($pj->status === 'direvisi')
+                                    <span style="width: 130px;" class="inline-flex justify-center items-center px-3 py-1 rounded-full text-[11px] font-bold bg-red-100 text-red-800 tracking-wider">
+                                        REVISI
+                                    </span>
+                                @elseif($pj->status === 'approved')
+                                    <span style="width: 130px;" class="inline-flex justify-center items-center px-3 py-1 rounded-full text-[11px] font-bold bg-green-100 text-green-800 tracking-wider">
+                                        SELESAI
                                     </span>
                                 @elseif($pj->status === 'rejected')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                        Ditolak
-                                    </span>
-                                @elseif($pj->status === 'submitted')
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        Perlu Verifikasi
+                                    <span style="width: 130px;" class="inline-flex justify-center items-center px-3 py-1 rounded-full text-[11px] font-bold bg-red-100 text-red-800 tracking-wider">
+                                        DITOLAK
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        Draft Desa
+                                    <span style="width: 130px;" class="inline-flex justify-center items-center px-3 py-1 rounded-full text-[11px] font-bold bg-green-100 text-green-800 tracking-wider">
+                                        DIPROSES
                                     </span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('admin.pjkades.show', $pj->id) }}"
-                                        class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded bg-primary text-white hover:bg-primary-light transition-all hover:scale-105 shadow-sm">
-                                        Verifikasi & SK
+                                        class="inline-flex items-center px-2 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 text-xs font-medium rounded border border-blue-200 transition-all hover:scale-105" title="Verifikasi & SK">
+                                        <span class="material-symbols-outlined text-[16px]">visibility</span>
                                     </a>
                                     <form action="{{ route('admin.pjkades.destroy', $pj->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus usulan SK Kades ini secara permanen? Semua berkas terkait akan ikut terhapus.');" class="inline">
                                         @csrf

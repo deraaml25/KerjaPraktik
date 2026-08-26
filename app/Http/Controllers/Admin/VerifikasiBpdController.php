@@ -50,6 +50,9 @@ class VerifikasiBpdController extends Controller
                 $bpd->jabatan = $draft['jabatan'] ?? $bpd->jabatan;
                 $bpd->no_sk_terakhir = $draft['no_sk_terakhir'] ?? $bpd->no_sk_terakhir;
                 $bpd->tgl_mulai_jabatan = $draft['tgl_mulai_jabatan'] ?? $bpd->tgl_mulai_jabatan;
+                if (isset($draft['file_sk'])) {
+                    $bpd->file_sk = $draft['file_sk'];
+                }
             }
             $bpd->draft_perubahan = null;
             $bpd->status_verifikasi = 'disetujui';

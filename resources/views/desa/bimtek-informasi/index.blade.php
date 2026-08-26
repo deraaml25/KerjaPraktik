@@ -4,13 +4,13 @@
 
     <!-- Tabs Nav -->
     <div class="border-b border-slate-200 mb-6 mt-4">
-        <nav class="flex space-x-8" aria-label="Tabs">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             <a href="{{ route('desa.bimtek-informasi.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.bimtek-informasi.*') ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.bimtek-informasi.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
                 Berita & Informasi Pembinaan
             </a>
             <a href="{{ route('desa.pengajuan-pembinaan.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.pengajuan-pembinaan.*') ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.pengajuan-pembinaan.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
                 Pengajuan Pembinaan Desa
             </a>
         </nav>
@@ -37,7 +37,7 @@
                             {{ $info->kategori === 'dokumentasi' ? 'bg-purple-100 text-purple-700' : ($info->kategori === 'pengumuman' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700') }}">
                             {{ ucfirst($info->kategori) }}
                         </span>
-                        <span class="text-xs text-slate-500 font-medium">{{ $info->published_at->format('d M Y') }}</span>
+                        <span class="text-xs text-slate-500 font-medium">{{ $info->published_at->format('d/m/y') }}</span>
                     </div>
 
                     <h3 class="font-bold text-slate-900 text-lg leading-snug mb-3 flex-1">{{ $info->judul }}</h3>

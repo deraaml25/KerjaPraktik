@@ -30,22 +30,22 @@
             <table class="min-w-full divide-y divide-border">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Tahun / Tanggal</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Formasi Kosong</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Jabatan yang Kosong</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Rencana Pelaksanaan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Rencana Anggaran</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Kondisi / Keterangan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Tahun / Tanggal</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Formasi Kosong</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Jabatan yang Kosong</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Rencana Pelaksanaan</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Rencana Anggaran</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Kondisi / Keterangan</th>
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-border">
                     @forelse ($rencana as $item)
                         <tr class="hover:bg-gray-50/50">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-ink font-mono">Tahun {{ $item->tahun ?? '-' }}</div>
-                                <div class="text-xs text-muted mt-0.5">{{ $item->created_at->format('d M Y') }}</div>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <div class="text-sm font-semibold text-ink font-mono text-center">Tahun {{ $item->tahun ?? '-' }}</div>
+                                <div class="text-xs text-muted mt-0.5 text-center">{{ $item->created_at->format('d/m/y') }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800">
@@ -57,9 +57,9 @@
                                     {{ $item->jabatan_kosong }}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-ink font-medium">
-                                    {{ $item->rencana_pelaksanaan_mulai ? $item->rencana_pelaksanaan_mulai->format('d M Y') : '-' }} s/d {{ $item->rencana_pelaksanaan_selesai ? $item->rencana_pelaksanaan_selesai->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <div class="text-sm text-ink font-medium text-center">
+                                    {{ $item->rencana_pelaksanaan_mulai ? $item->rencana_pelaksanaan_mulai->format('d/m/y') : '-' }} s/d {{ $item->rencana_pelaksanaan_selesai ? $item->rencana_pelaksanaan_selesai->format('d/m/y') : '-' }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

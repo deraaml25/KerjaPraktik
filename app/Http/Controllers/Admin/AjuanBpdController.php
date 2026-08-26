@@ -93,7 +93,9 @@ class AjuanBpdController extends Controller
             $ajuanBpd->update(['status' => 'diproses', 'posisi_surat' => $request->tahapan]);
         }
 
-        return back()->with('success', "Status proses / Disposisi berhasil diperbarui: {$request->tahapan}");
+        return back()
+            ->with('success', "Ajuan berhasil diteruskan ke: {$request->tahapan}")
+            ->with('posisi_baru', $request->tahapan);
     }
 
     /**

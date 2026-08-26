@@ -24,15 +24,15 @@
             <table class="min-w-full divide-y divide-border">
                 <thead>
                     <tr class="bg-gray-50">
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">No.
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">No.
                             Surat Rekomendasi</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">
                             Perangkat Desa / Layanan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">No.
+                        <th class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">No.
                             Registrasi Ajuan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Tanggal
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Tanggal
                             Terbit</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-muted uppercase tracking-wider">Aksi
+                        <th class="px-6 py-3 text-right text-xs font-bold text-ink uppercase tracking-wider">Aksi
                         </th>
                     </tr>
                 </thead>
@@ -57,8 +57,8 @@
                                     {{ $arsip->ajuan->no_registrasi }}
                                 </a>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-muted">
-                                {{ $arsip->created_at->format('d M Y') }}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-muted text-center">
+                                {{ $arsip->created_at->format('d/m/y') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right">
                                 <a href="{{ asset('storage/' . $arsip->file_path) }}" target="_blank"

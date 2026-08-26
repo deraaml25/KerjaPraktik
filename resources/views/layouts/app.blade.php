@@ -124,9 +124,11 @@
                         <div class="flex items-center gap-3">
                             <div class="w-1 h-6 bg-[#738FB9] rounded-full"></div>
                             <div class="flex flex-col">
+                                @hasSection('page-kicker')
                                 <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                                    @yield('page-kicker', 'Utama')
+                                    @yield('page-kicker')
                                 </span>
+                                @endif
                                 <h2 class="text-lg text-[#111827] font-bold font-display tracking-tight leading-none">
                                     @yield('title', 'Dashboard')
                                 </h2>

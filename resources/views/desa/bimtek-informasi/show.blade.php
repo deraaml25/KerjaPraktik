@@ -48,7 +48,7 @@
                 <div class="flex items-center gap-4 text-sm text-slate-500 font-medium mb-6">
                     <div class="flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-[18px]">calendar_today</span>
-                        {{ $bimtekInformasi->published_at->format('d M Y, H:i') }}
+                        {{ $bimtekInformasi->published_at->format('d/m/y, H:i') }}
                     </div>
                 </div>
 

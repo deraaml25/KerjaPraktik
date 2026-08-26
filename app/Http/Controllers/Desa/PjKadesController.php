@@ -179,7 +179,7 @@ class PjKadesController extends Controller
             ->findOrFail($id);
 
         $tahapAktif = match ($pjkades->posisi_surat) {
-            'Front Office (FO)' => 2,
+            'Pegawai' => 2,
             'Kabid PDPD' => 4,
             'Sekretaris Dinas' => 5,
             'Kepala Dinas' => 6,

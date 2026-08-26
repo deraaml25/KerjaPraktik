@@ -88,19 +88,19 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">No.
+                            class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">No.
                             Registrasi</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Jenis
+                            class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Jenis
                             Layanan</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">
                             Perangkat Desa</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Tahap /
+                            class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Tahap /
                             Status</th>
                         <th scope="col"
-                            class="px-6 py-3 text-right text-xs font-medium text-muted uppercase tracking-wider">Aksi
+                            class="px-6 py-3 text-right text-xs font-bold text-ink uppercase tracking-wider">Aksi
                         </th>
                     </tr>
                 </thead>

@@ -270,7 +270,7 @@ class AjuanController extends Controller
         if ($isSubmit) {
             $ajuan->update([
                 'status' => 'submitted',
-                'posisi_surat' => 'Front Office (FO)',
+                'posisi_surat' => 'Pegawai',
             ]);
 
             // Milestone 1: Berkas Diterima (Selesai)
@@ -289,7 +289,7 @@ class AjuanController extends Controller
                 'tahap' => 2,
                 'tgl_mulai' => now(),
                 'tgl_selesai' => null,
-                'catatan' => 'Menunggu pengecekan awal oleh Front Office (FO).',
+                'catatan' => 'Menunggu pengecekan awal oleh Pegawai.',
                 'updated_by' => auth()->id(),
             ]);
 

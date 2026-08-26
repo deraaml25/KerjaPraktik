@@ -17,23 +17,34 @@
 
     <!-- Tabs Nav -->
     <div class="border-b border-border mb-6">
-        <nav class="flex space-x-8" aria-label="Tabs">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
 
             <a href="{{ route('admin.bimtek-informasi.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('admin.bimtek-informasi.*') ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-ink hover:border-gray-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('admin.bimtek-informasi.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-muted hover:text-ink hover:border-gray-300' }}">
                 Berita & Informasi Pembinaan
             </a>
             <a href="{{ route('admin.pengajuan-pembinaan.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('admin.pengajuan-pembinaan.*') ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-ink hover:border-gray-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('admin.pengajuan-pembinaan.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-muted hover:text-ink hover:border-gray-300' }}">
                 Pengajuan Pembinaan Desa
             </a>
         </nav>
     </div>
 
     @if(session('success'))
-        <div class="mb-4 px-4 py-3 bg-green-50 border border-green-200 text-green-800 rounded-card text-sm">
-            ✅ {{ session('success') }}
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session("success") }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -69,7 +80,7 @@
                     </div>
 
                     <h3 class="font-display font-bold text-ink text-base leading-snug mb-2 flex-1">{{ $info->judul }}</h3>
-                    <p class="text-xs text-muted mb-3">{{ $info->published_at ? $info->published_at->format('d M Y') : 'Belum dijadwalkan' }}</p>
+                    <p class="text-xs text-muted mb-3">{{ $info->published_at ? $info->published_at->format('d/m/y') : 'Belum dijadwalkan' }}</p>
 
                     <div class="flex items-center justify-between gap-2 border-t border-border pt-3 mt-auto">
                         <a href="{{ route('admin.bimtek-informasi.show', $info) }}"
@@ -103,3 +114,4 @@
         <div class="mt-6">{{ $informasis->links() }}</div>
     @endif
 </x-app-layout>
+

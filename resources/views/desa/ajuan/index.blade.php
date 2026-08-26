@@ -26,12 +26,12 @@
             <table class="min-w-full divide-y divide-border">
                 <thead>
                     <tr class="bg-gray-50">
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">No. Registrasi / Tanggal</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Jenis Layanan</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Perangkat Desa</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Kelengkapan Dokumen</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">No. Registrasi / Tanggal</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Jenis Layanan</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Perangkat Desa</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Kelengkapan Dokumen</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
@@ -43,20 +43,20 @@
                             $percent = $totalChecklist > 0 ? round(($uploadedChecklist / $totalChecklist) * 100) : 0;
                         @endphp
                         <tr class="hover:bg-gray-50 transition-colors group">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="font-mono text-sm font-semibold text-ink">{{ $ajuan->no_registrasi }}</div>
-                                <div class="text-xs text-muted">{{ \Carbon\Carbon::parse($ajuan->tgl_diajukan)->format('d M Y') }}</div>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <div class="font-mono text-sm font-semibold text-ink text-center">{{ $ajuan->no_registrasi }}</div>
+                                <div class="text-xs text-muted text-center">{{ \Carbon\Carbon::parse($ajuan->tgl_diajukan)->format('d/m/y') }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @php
                                     $badgeColor = match($ajuan->jenisLayanan->nama) {
-                                        'Pengangkatan' => 'bg-primary-soft text-primary',
-                                        'Pemberhentian' => 'bg-red-100 text-danger',
-                                        'Rotasi' => 'bg-indigo-100 text-indigo-600',
+                                        'Pengangkatan' => 'bg-green-100 text-green-800',
+                                        'Pemberhentian' => 'bg-red-100 text-red-800',
+                                        'Rotasi' => 'bg-blue-100 text-blue-800',
                                         default => 'bg-gray-100 text-muted'
                                     };
                                 @endphp
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold {{ $badgeColor }}">
+                                <span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase mb-1 {{ $badgeColor }}" style="width: 140px;">
                                     {{ $ajuan->jenisLayanan->nama }}
                                 </span>
                                 <div class="text-xs text-muted mt-1 uppercase font-bold">{{ $ajuan->metode }}</div>

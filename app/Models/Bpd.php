@@ -12,6 +12,7 @@ class Bpd extends Model
         'nama',
         'jabatan',
         'no_sk_terakhir',
+        'file_sk',
         'tgl_mulai_jabatan',
         'status_aktif',
         'status_verifikasi',

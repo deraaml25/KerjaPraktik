@@ -3,8 +3,8 @@
 
     <div class="mb-5 flex flex-wrap items-center gap-3">
         <a href="{{ route('admin.ajuan.index') }}"
-            class="inline-flex items-center text-sm font-medium text-muted hover:text-ink">
-            <svg class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Kembali ke Daftar Antrean
@@ -12,14 +12,39 @@
     </div>
 
     @if(session('success'))
-        <div
-            class="mb-5 p-4 rounded-card bg-green-50 border border-green-200 text-green-800 flex items-start gap-3 shadow-sm">
-            <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-medium">{{ session('success') }}</span>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const posisi = '{{ session("posisi_baru") }}';
+                const isRevisi = posisi === 'Pegawai';
+
+                const milestoneIcon = {
+                    'Pegawai': '↩',
+                    'Verifikasi & Validasi Petugas': '🔍',
+                    'Penyusunan Draft Rekomendasi': '📝',
+                    'Verifikasi & Validasi Kabid PDPD': '📋',
+                    'Verifikasi & Validasi Sekretaris Dinas': '📋',
+                    'Verifikasi & Validasi Kepala Dinas': '📋',
+                    'Verifikasi & Validasi Kepala Bagian Hukum': '⚖️',
+                    'Verifikasi & Validasi Asisten Pemerintahan & Kesra': '📋',
+                    'Verifikasi & Validasi Sekda': '📋',
+                    'Tanda Tangan Bupati': '✍️',
+                    'Penomoran TU Umum Setda': '🔢',
+                    'Sudah di Dinpermasdes': '🏛️',
+                    'Selesai (Surat Terbit)': '🎉',
+                };
+
+                Swal.fire({
+                    icon: isRevisi ? 'warning' : 'success',
+                    title: isRevisi ? 'Dikembalikan untuk Revisi' : (posisi ? posisi : 'Berhasil!'),
+                    text: '{{ session("success") }}',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     <div class="{{ $ajuan->metode !== 'offline' ? 'grid grid-cols-1 lg:grid-cols-12 gap-6' : 'max-w-4xl mx-auto' }} h-[80vh]">
@@ -31,22 +56,12 @@
             <div class="px-4 py-3 border-b border-border bg-gray-50 flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-ink">Berkas Keseluruhan Persyaratan</p>
-                    <p class="text-xs text-muted">{{ $ajuan->jenisLayanan->nama }} — {{ $ajuan->desa->nama_desa }}</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="preview-title" class="hidden"></span>
                     @if($ajuan->metode === 'online' && $ajuan->berkas_zip)
                         <div class="flex gap-2">
-                            @if(preg_match('/\.(pdf|jpe?g|png)$/i', $ajuan->berkas_zip))
-                                <button type="button" onclick="previewPdf('{{ Storage::disk('public')->url($ajuan->berkas_zip) }}', 'Berkas Keseluruhan Persyaratan')"
-                                    class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 text-xs font-medium rounded hover:bg-blue-200 transition-colors flex-shrink-0">
-                                    <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    Lihat
-                                </button>
-                            @endif
+
                             <a href="{{ Storage::disk('public')->url($ajuan->berkas_zip) }}" target="_blank"
                                 class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0">
                                 <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +127,7 @@
             </div>
 
             {{-- LIST DOKUMEN CHECKLIST --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Verifikasi Syarat</h3>
                     <a href="{{ route('admin.ajuan.print-syarat', $ajuan) }}" target="_blank" class="inline-flex items-center text-xs px-2 py-1 bg-white border border-gray-300 rounded font-medium text-ink hover:bg-gray-50 transition-colors shadow-sm">
@@ -120,9 +135,7 @@
                         Print Checklist
                     </a>
                 </div>
-                <form id="bulk-verify-form" action="{{ route('admin.ajuan.verify-bulk', $ajuan) }}" method="POST">
-                    @csrf
-                    <div class="divide-y divide-border">
+                <div class="divide-y divide-border">
                         @foreach($ajuan->checklistAjuans as $index => $item)
                             <div class="p-4 border-l-4 transition-colors {{ $item->status == 'valid' || $item->status == 'lengkap' ? 'border-green-500 bg-green-50/40' : ($item->status == 'kurang' || $item->status == 'tidak_sesuai' ? 'border-red-500 bg-red-50/40' : 'border-amber-400 bg-amber-50/30') }}">
                                 <div class="flex items-center gap-3">
@@ -137,10 +150,6 @@
                                                 <button type="button"
                                                     onclick="previewPdf('{{ Storage::disk('public')->url($item->file_path) }}', '{{ addslashes($item->templateChecklist->nama_dokumen) }}')"
                                                     class="ml-2 inline-flex items-center text-xs px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                    </svg>
                                                     Lihat PDF
                                                 </button>
                                             @elseif($ajuan->metode === 'online' && !$ajuan->berkas_zip)
@@ -148,30 +157,25 @@
                                             @endif
                                         </div>
 
-                                        <div class="flex-shrink-0 ml-auto sm:ml-4">
-                                            <input type="checkbox" name="status[{{ $item->id }}]" value="valid"
-                                                   class="w-7 h-7 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors"
-                                                   {{ $item->status == 'valid' || $item->status == 'lengkap' ? 'checked' : '' }}
-                                                   title="Tandai Sesuai">
+                                        <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                            <span class="verify-saved-indicator text-xs text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                            <form action="{{ route('admin.ajuan.verify', [$ajuan->id, $item->id]) }}" method="POST" class="verify-form flex-shrink-0" data-url="{{ route('admin.ajuan.verify', [$ajuan->id, $item->id]) }}">
+                                                @csrf
+                                                <input type="checkbox" name="status" value="valid"
+                                                       class="w-7 h-7 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox"
+                                                       {{ $item->status == 'valid' || $item->status == 'lengkap' ? 'checked' : '' }}
+                                                       title="Tandai Sesuai">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    {{-- Tombol Simpan Centang --}}
-                    <div class="px-5 py-3 bg-gray-50 border-t border-border flex justify-end">
-                        <button type="submit"
-                            class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-semibold rounded shadow-sm transition-colors">
-                            <svg class="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Simpan Centang
-                        </button>
-                    </div>
-                </form>
             </div>
 
             {{-- PANEL BERKAS ZIP & CATATAN ADMIN --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2 overflow-hidden">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Keseluruhan Persyaratan & Catatan</h3>
 
@@ -226,7 +230,7 @@
 
                         <form action="{{ route('admin.ajuan.disposisi', $ajuan) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="posisi_baru" value="Front Office (FO)">
+                            <input type="hidden" name="posisi_baru" value="Pegawai">
                             <input type="hidden" name="status_ajuan_baru" value="direvisi">
                             <button type="submit"
                                 class="w-full py-2 px-3 bg-white border border-red-300 text-red-600 rounded text-xs font-medium hover:bg-red-50 transition-colors flex items-center justify-center shadow-sm" title="Kembalikan ke Front Office (Butuh Revisi)">
@@ -250,6 +254,10 @@
                     box.classList.remove('hidden');
                     box.classList.add('block');
                 } else {
+                    box.classList.remove('block');
+                    box.classList.add('hidden');
+                }
+            }
             function previewPdf(url, title = 'Pratinjau Dokumen') {
                 document.getElementById('pdf-empty-state').classList.add('hidden');
                 document.getElementById('pdf-iframe').classList.remove('hidden');
@@ -269,6 +277,60 @@
                     document.getElementById('pdf-empty-state').classList.add('hidden');
                     pdfIframe.classList.remove('hidden');
                 }
+
+                document.querySelectorAll('.verify-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const form = this.closest('.verify-form');
+                        const indicator = form.parentElement.querySelector('.verify-saved-indicator');
+                        const url = form.getAttribute('data-url');
+                        const token = form.querySelector('input[name="_token"]').value;
+                        const status = this.checked ? 'valid' : 'menunggu';
+                        
+                        const row = form.closest('.p-4');
+                        if (this.checked) {
+                            row.classList.remove('border-red-500', 'bg-red-50/40', 'border-amber-400', 'bg-amber-50/30');
+                            row.classList.add('border-green-500', 'bg-green-50/40');
+                        } else {
+                            row.classList.remove('border-green-500', 'bg-green-50/40', 'border-red-500', 'bg-red-50/40');
+                            row.classList.add('border-amber-400', 'bg-amber-50/30');
+                        }
+
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': token,
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({ 
+                                status: status 
+                            })
+                        }).then(async response => {
+                            if (!response.ok) {
+                                const errData = await response.json().catch(() => ({}));
+                                throw new Error(errData.message || 'Server error ' + response.status);
+                            }
+                            return response.json();
+                        }).then(data => {
+                            if (indicator) {
+                                indicator.classList.remove('hidden');
+                                setTimeout(() => indicator.classList.add('hidden'), 2000);
+                            }
+                        }).catch(err => {
+                            console.error('Network error during verification update', err);
+                            alert('Gagal menyimpan: ' + err.message);
+                            this.checked = !this.checked;
+                            if (this.checked) {
+                                row.classList.remove('border-amber-400', 'bg-amber-50/30', 'border-red-500', 'bg-red-50/40');
+                                row.classList.add('border-green-500', 'bg-green-50/40');
+                            } else {
+                                row.classList.remove('border-green-500', 'bg-green-50/40', 'border-red-500', 'bg-red-50/40');
+                                row.classList.add('border-amber-400', 'bg-amber-50/30');
+                            }
+                        });
+                    });
+                });
             });
         </script>
         <style>

@@ -27,6 +27,7 @@ class BpdRequest extends FormRequest
             'jabatan' => 'required|string|max:255',
             'no_sk_terakhir' => 'nullable|string|max:255',
             'tgl_mulai_jabatan' => 'nullable|date',
+            'file_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ];
     }
 
@@ -36,6 +37,8 @@ class BpdRequest extends FormRequest
             'nama.required' => 'Nama lengkap wajib diisi.',
             'jabatan.required' => 'Jabatan wajib diisi.',
             'tgl_mulai_jabatan.date' => 'Tanggal mulai jabatan harus berformat tanggal yang valid.',
+            'file_sk.mimes' => 'File SK harus berupa PDF, JPG, JPEG, atau PNG.',
+            'file_sk.max' => 'Ukuran File SK maksimal 2MB.',
         ];
     }
 }

@@ -1,76 +1,55 @@
 <x-app-layout>
     @section('title', 'Detail Pengajuan — ' . $pengajuanPembinaan->judul_kegiatan)
 
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-wrap items-center gap-3 mb-5">
+    <div>
+        <div class="mb-5 flex flex-wrap items-center gap-3">
             <a href="{{ route('admin.pengajuan-pembinaan.index') }}"
-                class="text-sm text-primary hover:underline flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+                <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Kembali ke Daftar Pengajuan
             </a>
         </div>
 
         @if(session('success'))
-            <div class="mb-4 px-4 py-3 bg-green-50 border border-green-200 text-green-800 rounded-card text-sm">
-                ✅ {{ session('success') }}
-            </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: '{{ session("success") }}',
+                        showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                    });
+                });
+            </script>
         @endif
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Detail Pengajuan -->
-            <div class="lg:col-span-2 space-y-5">
-                <div class="bg-white rounded-card shadow-sm border border-border p-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div>
-                            <h2 class="text-xl font-display font-bold text-ink">{{ $pengajuanPembinaan->judul_kegiatan }}</h2>
-                            <p class="text-sm text-muted mt-1">
-                                Diajukan oleh: <span class="font-medium text-ink">{{ $pengajuanPembinaan->desa->nama_desa ?? '-' }}</span>
-                                pada {{ $pengajuanPembinaan->created_at->format('d M Y, H:i') }}
-                            </p>
-                        </div>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $pengajuanPembinaan->status_color }} ml-4 flex-shrink-0">
-                            {{ $pengajuanPembinaan->status_label }}
-                        </span>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-xs font-medium text-muted uppercase tracking-wide mb-1">Tanggal Kegiatan yang Diusulkan</p>
-                            <p class="text-sm text-ink">{{ $pengajuanPembinaan->tanggal_diajukan->format('d M Y') }}</p>
-                        </div>
-
-                        @if($pengajuanPembinaan->deskripsi)
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start h-[80vh]">
+            <!-- Dokumen Persyaratan (Kiri) -->
+            <div class="lg:col-span-7 h-full overflow-y-auto custom-scrollbar pr-2 space-y-5">
+                    {{-- Surat Permohonan Narasumber --}}
+                    <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
+                        <div class="px-4 py-3 border-b border-border bg-gray-50 flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-medium text-muted uppercase tracking-wide mb-1">Deskripsi Kegiatan</p>
-                                <p class="text-sm text-ink leading-relaxed">{{ $pengajuanPembinaan->deskripsi }}</p>
+                                <p class="text-sm font-medium text-ink">Surat Permohonan Narasumber</p>
                             </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Dokumen Persyaratan -->
-                <div class="bg-white rounded-card shadow-sm border border-border p-6">
-                    <h3 class="text-md font-display font-bold text-ink mb-4 pb-2 border-b border-border">📎 Dokumen Persyaratan</h3>
-                    <div class="space-y-5">
-
-                        {{-- Surat Permohonan Narasumber --}}
-                        <div class="rounded-lg border border-border overflow-hidden">
-                            <div class="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-border">
-                                <div>
-                                    <p class="text-sm font-medium text-ink">Surat Permohonan Narasumber</p>
-                                    <p class="text-xs text-muted">Dokumen resmi permohonan narasumber ke Dinpermasdes</p>
-                                </div>
-                                @if($pengajuanPembinaan->file_surat_permohonan)
-                                    <a href="{{ asset('storage/' . $pengajuanPembinaan->file_surat_permohonan) }}" target="_blank"
-                                        class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-btn hover:bg-primary-light transition-colors flex-shrink-0">
-                                        📥 Unduh
-                                    </a>
-                                @else
-                                    <span class="text-xs text-muted italic">Tidak dilampirkan</span>
-                                @endif
-                            </div>
+                            @if($pengajuanPembinaan->file_surat_permohonan)
+                                <a href="{{ asset('storage/' . $pengajuanPembinaan->file_surat_permohonan) }}" target="_blank"
+                                    class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0" title="Unduh Berkas">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    Unduh
+                                </a>
+                            @else
+                                <span class="text-xs text-muted italic">Tidak dilampirkan</span>
+                            @endif
+                        </div>
                             @if($pengajuanPembinaan->file_surat_permohonan)
                                 @php $ext1 = strtolower(pathinfo($pengajuanPembinaan->file_surat_permohonan, PATHINFO_EXTENSION)); @endphp
                                 @if($ext1 === 'pdf')
@@ -112,22 +91,24 @@
                             @endif
                         </div>
 
-                        {{-- Surat Undangan --}}
-                        <div class="rounded-lg border border-border overflow-hidden">
-                            <div class="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-border">
-                                <div>
-                                    <p class="text-sm font-medium text-ink">Surat Undangan</p>
-                                    <p class="text-xs text-muted">Surat undangan resmi untuk Dinpermasdes</p>
-                                </div>
-                                @if($pengajuanPembinaan->file_undangan)
-                                    <a href="{{ asset('storage/' . $pengajuanPembinaan->file_undangan) }}" target="_blank"
-                                        class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-btn hover:bg-primary-light transition-colors flex-shrink-0">
-                                        📥 Unduh
-                                    </a>
-                                @else
-                                    <span class="text-xs text-muted italic">Tidak dilampirkan</span>
-                                @endif
+                    {{-- Surat Undangan --}}
+                    <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
+                        <div class="px-4 py-3 border-b border-border bg-gray-50 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-ink">Surat Undangan</p>
                             </div>
+                            @if($pengajuanPembinaan->file_undangan)
+                                <a href="{{ asset('storage/' . $pengajuanPembinaan->file_undangan) }}" target="_blank"
+                                    class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0" title="Unduh Berkas">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    Unduh
+                                </a>
+                            @else
+                                <span class="text-xs text-muted italic">Tidak dilampirkan</span>
+                            @endif
+                        </div>
                             @if($pengajuanPembinaan->file_undangan)
                                 @php $ext2 = strtolower(pathinfo($pengajuanPembinaan->file_undangan, PATHINFO_EXTENSION)); @endphp
                                 @if($ext2 === 'pdf')
@@ -168,30 +149,38 @@
                                 @endif
                             @endif
                         </div>
-
-                    </div>
-                </div>
-
-                <!-- Balasan Admin yang sudah ada -->
-                @if($pengajuanPembinaan->catatan_admin)
-                    <div class="bg-blue-50 rounded-card border border-blue-200 p-5">
-                        <h3 class="text-sm font-display font-bold text-blue-800 mb-2 flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
-                                </path>
-                            </svg>
-                            Balasan Dinpermasdes
-                            <span class="text-xs font-normal text-blue-600">({{ $pengajuanPembinaan->dibalas_at?->format('d M Y, H:i') }})</span>
-                        </h3>
-                        <p class="text-sm text-blue-900 leading-relaxed">{{ $pengajuanPembinaan->catatan_admin }}</p>
-                    </div>
-                @endif
             </div>
 
-            <!-- Form Balas -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-card shadow-sm border border-border p-6 sticky top-4">
+            <!-- Panel Kanan -->
+            <div class="lg:col-span-5 h-full overflow-y-auto custom-scrollbar pr-2 space-y-5">
+                    <!-- Detail Pengajuan -->
+                    <div class="bg-primary text-white rounded-card shadow-sm p-4">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <div>
+                                <p class="text-[10px] font-mono text-blue-200 uppercase tracking-wider">{{ $pengajuanPembinaan->created_at->format('d/m/y, H:i') }}</p>
+                                <h2 class="text-lg font-display font-bold leading-tight mt-0.5">{{ $pengajuanPembinaan->judul_kegiatan }}</h2>
+                            </div>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] leading-none font-bold uppercase tracking-wider {{ $pengajuanPembinaan->status_color }} flex-shrink-0 shadow-sm border border-white/20">
+                                {{ $pengajuanPembinaan->status_label }}
+                            </span>
+                        </div>
+                        <div class="text-xs border-t border-white/20 pt-2 flex flex-col gap-1.5">
+                            <p><span class="text-blue-200 inline-block w-20">Desa:</span> <span class="font-medium">{{ $pengajuanPembinaan->desa->nama_desa ?? '-' }}</span></p>
+                            <p><span class="text-blue-200 inline-block w-20">Tgl Usulan:</span> <span class="font-medium">{{ $pengajuanPembinaan->tanggal_diajukan->format('d F Y') }}</span></p>
+                        </div>
+                    </div>
+
+                    @if($pengajuanPembinaan->deskripsi)
+                        <div class="bg-white rounded-card shadow-sm border border-border p-5">
+                            <h3 class="text-xs font-bold text-ink uppercase tracking-wide mb-2">Deskripsi Kegiatan</h3>
+                            <p class="text-sm text-muted leading-relaxed whitespace-pre-wrap">{{ $pengajuanPembinaan->deskripsi }}</p>
+                        </div>
+                    @endif
+
+
+
+                    <!-- Form Balas -->
+                    <div class="bg-white rounded-card shadow-sm border border-border p-6">
                     <h3 class="text-md font-display font-bold text-ink mb-4 pb-2 border-b border-border">
                         Berikan Balasan
                     </h3>
@@ -234,3 +223,4 @@
         </div>
     </div>
 </x-app-layout>
+

@@ -7,23 +7,19 @@
             <table class="min-w-full divide-y divide-border">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">Desa</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-ink uppercase tracking-wider">No. Regulasi</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Desa
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">No.
-                            Regulasi</th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Judul /
+                            class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Judul /
                             Tipe</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted uppercase tracking-wider">Tanggal
+                            class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Tanggal
                             Masuk</th>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-muted tracking-wider uppercase">Status
+                            class="px-6 py-3 text-left text-xs font-bold text-ink tracking-wider uppercase">Status
                         </th>
                         <th scope="col"
-                            class="px-6 py-3 text-right text-xs font-medium text-muted tracking-wider uppercase">Aksi
+                            class="px-6 py-3 text-right text-xs font-bold text-ink tracking-wider uppercase">Aksi
                         </th>
                     </tr>
                 </thead>
@@ -35,36 +31,33 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-ink font-medium">
                                 {{ $reg->no_regulasi ?? '-' }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="text-sm font-medium text-ink font-display">{{ $reg->judul }}</div>
-                                <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-primary-soft text-primary mt-1 capitalize">{{ $reg->tipe }}</span>
+                                <div class="text-xs font-bold text-blue-700 mt-1 capitalize">{{ $reg->tipe }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-muted">
-                                {{ $reg->tgl_diajukan ? $reg->tgl_diajukan->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-muted">
+                                {{ $reg->tgl_diajukan ? $reg->tgl_diajukan->format('d/m/y') : '-' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($reg->status === 'disahkan')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Disahkan</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-green-100 text-green-800" style="width: 170px;">DISAHKAN</span>
                                 @elseif($reg->status === 'perlu_revisi')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Perlu
-                                        Revisi</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-red-100 text-red-800" style="width: 170px;">PERLU REVISI</span>
                                 @elseif($reg->status === 'disetujui')
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Menunggu Desa Sahkan</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-emerald-100 text-emerald-800" style="width: 170px;">MENUNGGU DESA SAHKAN</span>
                                 @else
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Menunggu
-                                        Verifikasi</span>
+                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-blue-100 text-blue-800" style="width: 170px;">MENUNGGU VERIFIKASI</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex items-center justify-end gap-2">
                                     <a href="{{ route('admin.regulasi.show', $reg) }}"
-                                        class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded bg-primary text-white hover:bg-primary-light transition-all hover:scale-105 shadow-sm">
-                                        Tinjau
+                                        class="inline-flex items-center px-2 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 text-xs font-medium rounded border border-blue-200 transition-all hover:scale-105" title="Tinjau">
+                                        <span class="material-symbols-outlined text-[16px]">visibility</span>
                                     </a>
                                     <form action="{{ route('admin.regulasi.destroy', $reg->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus regulasi ini secara permanen? Semua berkas terkait akan ikut terhapus.');" class="inline">
                                         @csrf

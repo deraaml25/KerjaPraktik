@@ -3,13 +3,13 @@
 
     <!-- Tabs Nav -->
     <div class="border-b border-slate-200 mb-6">
-        <nav class="flex space-x-8" aria-label="Tabs">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             <a href="{{ route('desa.bimtek-informasi.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.bimtek-informasi.*') ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.bimtek-informasi.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
                 Berita & Informasi Pembinaan
             </a>
             <a href="{{ route('desa.pengajuan-pembinaan.index') }}"
-               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.pengajuan-pembinaan.*') ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
+               class="border-b-2 py-4 px-1 text-sm font-semibold {{ request()->routeIs('desa.pengajuan-pembinaan.*') ? 'border-blue-700 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300' }}">
                 Pengajuan Pembinaan Desa
             </a>
         </nav>
@@ -31,24 +31,33 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="border-b border-slate-200">
-                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Tgl Pengajuan</th>
-                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Judul Kegiatan</th>
-                        <th class="py-3 px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                        <th class="py-3 px-4 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">Aksi</th>
+                        <th class="py-3 px-4 text-center text-xs font-bold text-ink uppercase tracking-wider">Tgl Pengajuan</th>
+                        <th class="py-3 px-4 text-xs font-bold text-ink uppercase tracking-wider">Judul Kegiatan</th>
+                        <th class="py-3 px-4 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="py-3 px-4 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($pengajuans as $pengajuan)
                     <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors group">
-                        <td class="py-3 px-4 text-sm text-slate-600">
-                            {{ $pengajuan->created_at->format('d M Y') }}
+                        <td class="py-3 px-4 text-center text-sm text-slate-600 whitespace-nowrap">
+                            {{ $pengajuan->created_at->format('d/m/y') }}
                         </td>
                         <td class="py-3 px-4">
                             <p class="text-sm font-bold text-slate-900">{{ $pengajuan->judul_kegiatan }}</p>
                         </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                {{ ucfirst($pengajuan->status) }}
+                        <td class="py-3 px-4 text-center">
+                            @php
+                                $statusColor = match($pengajuan->status) {
+                                    'menunggu' => 'bg-yellow-100 text-yellow-800',
+                                    'disetujui' => 'bg-green-100 text-green-800',
+                                    'ditolak' => 'bg-red-100 text-red-800',
+                                    'selesai' => 'bg-green-100 text-green-800',
+                                    default => 'bg-gray-100 text-gray-600',
+                                };
+                            @endphp
+                            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] tracking-wider font-bold uppercase {{ $statusColor }}" style="width: 110px;">
+                                {{ $pengajuan->status }}
                             </span>
                         </td>
                         <td class="py-3 px-4 text-center">

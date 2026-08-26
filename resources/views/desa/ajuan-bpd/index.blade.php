@@ -19,12 +19,12 @@
                 <table class="min-w-full divide-y divide-border">
                     <thead>
                         <tr class="bg-gray-50">
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">No. Registrasi / Tanggal</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Jenis Ajuan</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Anggota BPD</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Kelengkapan Dokumen</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">No. Registrasi / Tanggal</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Jenis Ajuan</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Anggota BPD</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Kelengkapan Dokumen</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-border">
@@ -36,9 +36,9 @@
                                 $percent = $totalChecklist > 0 ? round(($uploadedChecklist / $totalChecklist) * 100) : 0;
                             @endphp
                             <tr class="hover:bg-gray-50 transition-colors group">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="font-mono text-sm font-semibold text-ink">{{ $ajuan->no_registrasi }}</div>
-                                    <div class="text-xs text-muted mt-0.5">{{ $ajuan->tgl_diajukan ? \Carbon\Carbon::parse($ajuan->tgl_diajukan)->translatedFormat('d M Y') : ($ajuan->created_at ? $ajuan->created_at->translatedFormat('d M Y') : '-') }}</div>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <div class="font-mono text-sm font-semibold text-ink text-center">{{ $ajuan->no_registrasi }}</div>
+                                    <div class="text-xs text-muted mt-0.5 text-center">{{ $ajuan->tgl_diajukan ? \Carbon\Carbon::parse($ajuan->tgl_diajukan)->translatedFormat('d/m/y') : ($ajuan->created_at ? $ajuan->created_at->translatedFormat('d/m/y') : '-') }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php

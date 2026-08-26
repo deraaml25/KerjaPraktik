@@ -17,8 +17,8 @@
             <div class="flex items-start justify-between">
                 <div class="flex-1">
                     <h2 class="text-xl font-display font-bold text-ink">{{ $pengajuanPembinaan->judul_kegiatan }}</h2>
-                    <p class="text-sm text-muted mt-1">Diajukan pada {{ $pengajuanPembinaan->created_at->format('d M Y, H:i') }}</p>
-                    <p class="text-sm text-muted">Rencana tanggal: <span class="text-ink font-medium">{{ $pengajuanPembinaan->tanggal_diajukan->format('d M Y') }}</span></p>
+                    <p class="text-sm text-muted mt-1">Diajukan pada {{ $pengajuanPembinaan->created_at->format('d/m/y, H:i') }}</p>
+                    <p class="text-sm text-muted">Rencana tanggal: <span class="text-ink font-medium">{{ $pengajuanPembinaan->tanggal_diajukan->format('d/m/y') }}</span></p>
                 </div>
                 <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium {{ $pengajuanPembinaan->status_color }} ml-4 flex-shrink-0">
                     {{ $pengajuanPembinaan->status_label }}
@@ -78,7 +78,7 @@
                     </svg>
                     Balasan dari Dinpermasdes
                     @if($pengajuanPembinaan->dibalas_at)
-                        <span class="text-xs font-normal text-blue-500">({{ $pengajuanPembinaan->dibalas_at->format('d M Y, H:i') }})</span>
+                        <span class="text-xs font-normal text-blue-500">({{ $pengajuanPembinaan->dibalas_at->format('d/m/y, H:i') }})</span>
                     @endif
                 </h3>
                 <p class="text-sm text-blue-900 leading-relaxed">{{ $pengajuanPembinaan->catatan_admin }}</p>

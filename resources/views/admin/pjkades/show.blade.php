@@ -3,26 +3,33 @@
 
     <div class="mb-5 flex flex-wrap items-center gap-3">
         <a href="{{ route('admin.pjkades.index') }}"
-            class="inline-flex items-center text-sm font-medium text-muted hover:text-ink">
-            <svg class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Kembali ke Daftar Evaluasi SK Kades
         </a>
     </div>
 
-    @if(session('success'))
-        <div class="mb-5 p-4 rounded-card bg-green-50 border border-green-200 text-green-800 flex items-start gap-3 shadow-sm">
-            <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-medium">{{ session('success') }}</span>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="mb-5 p-4 rounded-card bg-red-50 border border-red-200 text-red-800 flex items-start gap-3 shadow-sm">
-            <span class="font-medium">{{ session('error') }}</span>
-        </div>
+    @if(session('success') || session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const posisi = '{{ session("posisi_baru") }}';
+                const isError = {{ session('error') ? 'true' : 'false' }};
+                const isRevisi = posisi.toLowerCase().includes('revisi') || posisi === 'Pegawai';
+
+                Swal.fire({
+                    icon: isError ? 'error' : (isRevisi ? 'warning' : 'success'),
+                    title: isError ? 'Gagal!' : (isRevisi ? 'Dikembalikan untuk Revisi' : (posisi ? posisi : 'Berhasil!')),
+                    text: '{{ session("success") ?? session("error") }}',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     <div class="{{ $pjkades->metode !== 'offline' ? 'grid grid-cols-1 lg:grid-cols-12 gap-6' : 'max-w-4xl mx-auto' }} h-[80vh]">
@@ -37,16 +44,6 @@
                 </div>
                 @if($pjkades->berkas_zip)
                     <div class="flex gap-2">
-                        @if(preg_match('/\.(pdf|jpe?g|png)$/i', $pjkades->berkas_zip))
-                            <button type="button" onclick="previewFile('{{ Storage::disk('public')->url($pjkades->berkas_zip) }}')"
-                                class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 text-xs font-medium rounded hover:bg-blue-200 transition-colors flex-shrink-0">
-                                <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                                Lihat
-                            </button>
-                        @endif
                         <a href="{{ Storage::disk('public')->url($pjkades->berkas_zip) }}" target="_blank"
                             class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0">
                             <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,10 +128,6 @@
                                             <button type="button"
                                                 onclick="previewFile('{{ asset('storage/' . $item->file_path) }}')"
                                                 class="ml-2 inline-flex items-center text-xs px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
-                                                <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
                                                 Lihat Dokumen
                                             </button>
                                         @elseif(!$pjkades->berkas_zip)
@@ -170,7 +163,6 @@
                             <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-700 rounded">Berkas ZIP/PDF belum diunggah</span>
                         @else
                             <a href="{{ Storage::disk('public')->url($pjkades->berkas_zip) }}" target="_blank" class="inline-flex items-center text-xs font-semibold px-3 py-1 bg-primary text-white rounded hover:bg-primary-light transition-colors">
-                                <svg class="w-3.5 h-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                 Lihat ZIP/PDF Upload
                             </a>
                         @endif

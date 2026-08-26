@@ -84,32 +84,34 @@
                     <div class="p-6">
                         <h2 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Detail Perangkat Desa</h2>
                         
-                        <div class="space-y-3">
-                            <div>
-                                <p class="text-sm text-gray-500">Nama</p>
-                                <p class="font-medium text-gray-900">{{ $row->nama }}</p>
+                        <div class="divide-y divide-gray-100 border-t border-b border-gray-100">
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Nama</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $row->nama }}</div>
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Jabatan</p>
-                                <p class="font-medium text-gray-900">{{ $row->jabatan }}</p>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Jabatan</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $row->jabatan }}</div>
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-500">Tanggal Mulai Jabatan</p>
-                                <p class="font-medium text-gray-900">{{ $row->tgl_mulai_jabatan ? $row->tgl_mulai_jabatan->format('d F Y') : '-' }}</p>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">Tanggal Mulai Jabatan</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $row->tgl_mulai_jabatan ? $row->tgl_mulai_jabatan->format('d/m/y') : '-' }}</div>
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-500">No. SK Terakhir</p>
-                                <p class="font-medium text-gray-900">{{ $row->no_sk_terakhir ?? '-' }}</p>
+                            <div class="py-3 grid grid-cols-3 gap-4">
+                                <div class="text-sm font-medium text-gray-500">No. SK Terakhir</div>
+                                <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $row->no_sk_terakhir ?? '-' }}</div>
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-500">File SK</p>
-                                @if($row->file_sk)
-                                    <a href="{{ asset('storage/' . $row->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 mt-1 text-sm text-primary font-bold hover:underline bg-blue-50 px-3 py-1.5 rounded-lg">
-                                        <span class="material-symbols-outlined text-[16px]">description</span> Lihat File SK
-                                    </a>
-                                @else
-                                    <p class="font-medium text-gray-900">-</p>
-                                @endif
+                            <div class="py-3 grid grid-cols-3 gap-4 items-center">
+                                <div class="text-sm font-medium text-gray-500">File SK</div>
+                                <div class="col-span-2">
+                                    @if($row->file_sk)
+                                        <a href="{{ asset('storage/' . $row->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 text-xs text-primary font-bold hover:underline bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100 transition-colors hover:bg-blue-100">
+                                            <span class="material-symbols-outlined text-[16px]">description</span> Lihat File SK
+                                        </a>
+                                    @else
+                                        <span class="text-sm font-semibold text-gray-900">-</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         

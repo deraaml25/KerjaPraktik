@@ -33,7 +33,7 @@
                 @else
                     <span class="px-2.5 py-1 rounded text-xs font-medium bg-gray-100 text-gray-500">Draft</span>
                 @endif
-                <span class="text-xs text-muted">{{ $bimtekInformasi->published_at?->format('d M Y, H:i') ?? 'Belum dijadwalkan' }}</span>
+                <span class="text-xs text-muted">{{ $bimtekInformasi->published_at?->format('d/m/y, H:i') ?? 'Belum dijadwalkan' }}</span>
             </div>
 
             <h1 class="text-2xl font-display font-bold text-ink mb-6">{{ $bimtekInformasi->judul }}</h1>
@@ -64,3 +64,4 @@
         </div>
     </div>
 </x-app-layout>
+

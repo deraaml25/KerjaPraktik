@@ -4,9 +4,20 @@
 
 
     @if(session('success'))
-        <div class="p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 text-sm mb-6 font-medium">
-            {{ session('success') }}
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session("success") }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     {{-- Statistik Cards --}}
@@ -97,14 +108,14 @@
             <table class="min-w-full divide-y divide-border">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Kecamatan & Desa</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Formasi Kosong</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Jabatan yang Kosong</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Rencana Pelaksanaan</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Rencana Anggaran</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Tahun</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-muted uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Kecamatan & Desa</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Formasi Kosong</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Jabatan yang Kosong</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Rencana Pelaksanaan</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Rencana Anggaran</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Tahun</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-xs font-bold text-ink uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-border">
@@ -124,9 +135,9 @@
                                     {{ $item->jabatan_kosong }}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-ink font-medium">
-                                    {{ $item->rencana_pelaksanaan_mulai ? $item->rencana_pelaksanaan_mulai->format('d M Y') : '-' }} s/d {{ $item->rencana_pelaksanaan_selesai ? $item->rencana_pelaksanaan_selesai->format('d M Y') : '-' }}
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <div class="text-sm text-ink font-medium text-center">
+                                    {{ $item->rencana_pelaksanaan_mulai ? $item->rencana_pelaksanaan_mulai->format('d/m/y') : '-' }} s/d {{ $item->rencana_pelaksanaan_selesai ? $item->rencana_pelaksanaan_selesai->format('d/m/y') : '-' }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -154,9 +165,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="{{ route('admin.rencana-p3d.show', $item->id) }}"
-                                    class="inline-flex items-center px-3 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold rounded-btn transition-colors">
-                                    <span class="material-symbols-outlined text-[14px] mr-1">visibility</span>
-                                    Detail / Evaluasi
+                                    class="inline-flex items-center px-2 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 text-xs font-medium rounded border border-blue-200 transition-all hover:scale-105" title="Detail / Evaluasi">
+                                    <span class="material-symbols-outlined text-[16px]">visibility</span>
                                 </a>
                             </td>
                         </tr>
@@ -181,3 +191,4 @@
         @endif
     </div>
 </x-app-layout>
+

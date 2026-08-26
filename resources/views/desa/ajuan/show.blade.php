@@ -2,8 +2,8 @@
     @section('title', 'Detail Ajuan: ' . $ajuan->no_registrasi)
 
     <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <a href="{{ route('desa.ajuan.index') }}" class="inline-flex items-center text-sm font-medium text-muted hover:text-ink">
-            <svg class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <a href="{{ route('desa.ajuan.index') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
             Kembali ke Daftar Ajuan
         </a>
         @if($ajuan->status === 'selesai' && $ajuan->arsipRekom)
@@ -67,11 +67,11 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3 bg-black/10 rounded-xl p-4 border border-white/10">
                     <div>
                         <p class="text-xs text-primary-soft mb-0.5">Tgl Diajukan</p>
-                        <p class="font-semibold text-sm">{{ $ajuan->tgl_diajukan ? $ajuan->tgl_diajukan->format('d M Y') : '-' }}</p>
+                        <p class="font-semibold text-sm">{{ $ajuan->tgl_diajukan ? $ajuan->tgl_diajukan->format('d/m/y') : '-' }}</p>
                     </div>
                     <div>
                         <p class="text-xs text-primary-soft mb-0.5">Target SLA (20 HK)</p>
-                        <p class="font-semibold text-sm">{{ $ajuan->tgl_sla_batas ? $ajuan->tgl_sla_batas->format('d M Y') : '-' }}</p>
+                        <p class="font-semibold text-sm">{{ $ajuan->tgl_sla_batas ? $ajuan->tgl_sla_batas->format('d/m/y') : '-' }}</p>
                     </div>
                     @if($ajuan->alasanPemberhentian)
                     <div>
@@ -116,7 +116,6 @@
                                     @if($ajuan->metode === 'online')
                                         @if($item->file_path)
                                             <a href="{{ Storage::disk('public')->url($item->file_path) }}" target="_blank" class="flex items-center text-xs font-medium text-primary hover:text-primary-light transition-colors bg-primary-soft/10 px-3 py-1.5 rounded-full">
-                                                <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                                 Lihat File
                                             </a>
                                         @endif
@@ -174,7 +173,6 @@
                                     Berkas Keseluruhan Persyaratan (ZIP/PDF)
                                 </div>
                                 <a href="{{ Storage::disk('public')->url($ajuan->berkas_zip) }}" target="_blank" class="inline-flex items-center text-sm text-primary hover:text-primary-light font-medium bg-primary-soft/10 px-4 py-2 rounded-lg transition-colors">
-                                    <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                     Unduh / Lihat Berkas
                                 </a>
                             </div>

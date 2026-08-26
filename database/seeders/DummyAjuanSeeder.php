@@ -33,7 +33,7 @@ class DummyAjuanSeeder extends Seeder
             'jenis_layanan_id' => $layanan->id,
             'perangkat_desa_id' => $perangkat->id,
             'status' => 'submitted',
-            'posisi_surat' => 'Front Office (FO)',
+            'posisi_surat' => 'Pegawai',
             'tgl_diajukan' => now(),
             'tgl_sla_batas' => now()->addDays(28),
         ]);

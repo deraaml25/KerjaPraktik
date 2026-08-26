@@ -24,9 +24,20 @@
         </div>
 
         @if(session('success'))
-            <div class="mb-4 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 text-sm font-medium">
-                {{ session('success') }}
-            </div>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: '{{ session("success") }}',
+                        showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                    });
+                });
+            </script>
         @endif
 
         <!-- Tab Content: Data Perangkat -->
@@ -81,36 +92,38 @@
                         <div class="p-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Detail Perangkat Desa</h2>
                             
-                            <div class="space-y-3">
-                                <div>
-                                    <p class="text-sm text-gray-500">Nama</p>
-                                    <p class="font-medium text-gray-900">{{ $p->nama }}</p>
+                            <div class="divide-y divide-gray-100 border-t border-b border-gray-100">
+                                <div class="py-3 grid grid-cols-3 gap-4">
+                                    <div class="text-sm font-medium text-gray-500">Nama</div>
+                                    <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->nama }}</div>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Jabatan</p>
-                                    <p class="font-medium text-gray-900">{{ $p->jabatan }}</p>
+                                <div class="py-3 grid grid-cols-3 gap-4">
+                                    <div class="text-sm font-medium text-gray-500">Jabatan</div>
+                                    <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->jabatan }}</div>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Desa / Kecamatan</p>
-                                    <p class="font-medium text-gray-900">{{ $p->desa->nama_desa ?? '-' }} / {{ $p->desa->kecamatan->nama_kecamatan ?? '-' }}</p>
+                                <div class="py-3 grid grid-cols-3 gap-4">
+                                    <div class="text-sm font-medium text-gray-500">Desa / Kecamatan</div>
+                                    <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->desa->nama_desa ?? '-' }} / {{ $p->desa->kecamatan->nama_kecamatan ?? '-' }}</div>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Tanggal Mulai Jabatan</p>
-                                    <p class="font-medium text-gray-900">{{ $p->tgl_mulai_jabatan ? $p->tgl_mulai_jabatan->format('d F Y') : '-' }}</p>
+                                <div class="py-3 grid grid-cols-3 gap-4">
+                                    <div class="text-sm font-medium text-gray-500">Tanggal Mulai Jabatan</div>
+                                    <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->tgl_mulai_jabatan ? $p->tgl_mulai_jabatan->format('d/m/y') : '-' }}</div>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">No. SK Terakhir</p>
-                                    <p class="font-medium text-gray-900">{{ $p->no_sk_terakhir ?? '-' }}</p>
+                                <div class="py-3 grid grid-cols-3 gap-4">
+                                    <div class="text-sm font-medium text-gray-500">No. SK Terakhir</div>
+                                    <div class="col-span-2 text-sm font-semibold text-gray-900">{{ $p->no_sk_terakhir ?? '-' }}</div>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">File SK</p>
-                                    @if($p->file_sk)
-                                        <a href="{{ asset('storage/' . $p->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 mt-1 text-sm text-primary font-bold hover:underline bg-blue-50 px-3 py-1.5 rounded-lg">
-                                            <span class="material-symbols-outlined text-[16px]">description</span> Lihat File SK
-                                        </a>
-                                    @else
-                                        <p class="font-medium text-gray-900">-</p>
-                                    @endif
+                                <div class="py-3 grid grid-cols-3 gap-4 items-center">
+                                    <div class="text-sm font-medium text-gray-500">File SK</div>
+                                    <div class="col-span-2">
+                                        @if($p->file_sk)
+                                            <a href="{{ asset('storage/' . $p->file_sk) }}" target="_blank" class="inline-flex items-center gap-1 text-xs text-primary font-bold hover:underline bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100 transition-colors hover:bg-blue-100">
+                                                <span class="material-symbols-outlined text-[16px]">description</span> Lihat File
+                                            </a>
+                                        @else
+                                            <span class="text-sm font-semibold text-gray-900">-</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             
@@ -142,11 +155,11 @@
             <table class="w-full text-left text-sm whitespace-nowrap">
                 <thead class="bg-gray-50 border-b border-border">
                     <tr>
-                        <th class="px-6 py-4 font-semibold text-ink">Desa</th>
-                        <th class="px-6 py-4 font-semibold text-ink">Data Lama / Saat Ini</th>
-                        <th class="px-6 py-4 font-semibold text-ink">Jenis Usulan</th>
-                        <th class="px-6 py-4 font-semibold text-ink">Data Baru (Draft)</th>
-                        <th class="px-6 py-4 font-semibold text-ink text-right">Aksi</th>
+                        <th class="px-6 py-4 font-bold text-ink">Desa</th>
+                        <th class="px-6 py-4 font-bold text-ink">Data Lama / Saat Ini</th>
+                        <th class="px-6 py-4 font-bold text-ink">Jenis Usulan</th>
+                        <th class="px-6 py-4 font-bold text-ink">Data Baru (Draft)</th>
+                        <th class="px-6 py-4 font-bold text-ink text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
@@ -205,11 +218,11 @@
                                 <div class="flex items-center justify-end gap-2">
                                     <form action="{{ route('admin.perangkat.approve', $item->id) }}" method="POST" onsubmit="return confirm('Setujui usulan ini?');">
                                         @csrf
-                                        <button type="submit" class="px-3 py-1.5 bg-green-600 text-white text-xs font-bold rounded hover:bg-green-700">Setujui</button>
+                                        <button type="submit" class="px-3 py-1.5 bg-green-100 text-green-800 border border-green-200 text-xs font-bold rounded hover:bg-green-200">Setujui</button>
                                     </form>
                                     <form action="{{ route('admin.perangkat.reject', $item->id) }}" method="POST" onsubmit="return confirm('Tolak usulan ini?');">
                                         @csrf
-                                        <button type="submit" class="px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded hover:bg-red-700">Tolak</button>
+                                        <button type="submit" class="px-3 py-1.5 bg-red-100 text-red-800 border border-red-200 text-xs font-bold rounded hover:bg-red-200">Tolak</button>
                                     </form>
                                 </div>
                             </td>
@@ -232,3 +245,4 @@
         </div>
     </div>
 </x-app-layout>
+

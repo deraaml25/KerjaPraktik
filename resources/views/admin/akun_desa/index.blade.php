@@ -14,9 +14,20 @@
     </div>
 
     @if(session('success'))
-        <div class="mb-4 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 text-sm font-medium">
-            {{ session('success') }}
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session("success") }}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    toast: true,
+                    position: 'top'
+                });
+            });
+        </script>
     @endif
 
     @if($errors->any())
@@ -31,34 +42,33 @@
 
     <div class="bg-white rounded-card shadow-sm border border-border overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm whitespace-nowrap">
+            <table class="w-full text-sm whitespace-nowrap text-left">
                 <thead class="bg-gray-50 border-b border-border">
                     <tr>
-                        <th class="px-6 py-4 font-semibold text-ink">Nama Desa</th>
-                        <th class="px-6 py-4 font-semibold text-ink">Kecamatan</th>
-                        <th class="px-6 py-4 font-semibold text-ink">Username</th>
-                        <th class="px-6 py-4 font-semibold text-ink text-right">Aksi</th>
+                        <th class="px-6 py-4 font-bold text-ink text-left" style="width: 35%; padding-left: 5rem;">Nama Desa</th>
+                        <th class="px-6 py-4 font-bold text-ink text-center" style="width: 25%;">Kecamatan</th>
+                        <th class="px-6 py-4 font-bold text-ink text-center" style="width: 25%;">Username</th>
+                        <th class="px-6 py-4 font-bold text-ink text-center" style="width: 15%;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
                     @forelse($akuns as $akun)
                         <tr class="hover:bg-gray-50/50">
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left" style="width: 35%; padding-left: 5rem;">
                                 <div class="font-bold text-ink">{{ $akun->desa->nama_desa ?? '-' }}</div>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 <div class="text-sm text-muted">{{ $akun->desa->kecamatan->nama_kecamatan ?? '-' }}</div>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 <div class="font-mono text-sm text-primary font-bold">{{ $akun->username }}</div>
                             </td>
-                            <td class="px-6 py-4 text-right">
+                            <td class="px-6 py-4 text-center">
                                 <button type="button" 
                                     x-data=""
                                     x-on:click="$dispatch('open-modal', 'reset-password-{{ $akun->id }}')"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-700 font-bold rounded-lg transition-colors">
-                                    <span class="material-symbols-outlined text-[18px]">key</span>
-                                    Reset Password
+                                    class="inline-flex items-center px-2 py-1.5 bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-700 text-xs font-medium rounded border border-yellow-200 transition-all hover:scale-105" title="Reset Password">
+                                    <span class="material-symbols-outlined text-[16px]">key</span>
                                 </button>
 
                                 <!-- Modal Reset Password -->
@@ -116,3 +126,4 @@
         @endif
     </div>
 </x-app-layout>
+
