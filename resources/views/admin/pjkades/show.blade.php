@@ -114,33 +114,33 @@
 
                 <div class="divide-y divide-border">
                     @foreach($pjkades->checklists as $index => $item)
-                        <div class="p-4 border-l-4 transition-colors {{ $item->status_verifikasi == 'valid' ? 'border-green-500 bg-green-50/40' : ($item->status_verifikasi == 'tidak_sesuai' ? 'border-red-500 bg-red-50/40' : 'border-amber-400 bg-amber-50/30') }}">
+                        <div class="p-3 transition-colors hover:bg-slate-50">
                             <div class="flex items-center gap-3">
-                                <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-bold text-ink border border-border shadow-sm flex-shrink-0">{{ $index + 1 }}</span>
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">{{ $index + 1 }}</span>
                                 
                                 <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
                                     <div class="flex items-center gap-2 flex-wrap">
-                                        <p class="text-sm font-semibold text-ink leading-tight">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
                                             {{ $item->nama_dokumen }}
                                         </p>
 
                                         @if($item->file_path)
                                             <button type="button"
                                                 onclick="previewFile('{{ asset('storage/' . $item->file_path) }}')"
-                                                class="ml-2 inline-flex items-center text-xs px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
+                                                class="ml-2 inline-flex items-center text-[10px] px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
                                                 Lihat Dokumen
                                             </button>
                                         @elseif(!$pjkades->berkas_zip)
-                                            <span class="ml-2 inline-block px-2 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded border border-gray-200">Belum Terunggah</span>
+                                            <span class="ml-2 inline-block px-2 py-1 bg-gray-100 text-gray-500 text-[10px] font-medium rounded border border-gray-200">Belum Terunggah</span>
                                         @endif
                                     </div>
 
                                     <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
-                                        <span class="verify-saved-indicator text-xs text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
                                         <form action="{{ route('admin.pjkades.verify-checklist', [$pjkades->id, $item->id]) }}" method="POST" class="verify-form flex-shrink-0" data-url="{{ route('admin.pjkades.verify-checklist', [$pjkades->id, $item->id]) }}">
                                             @csrf
                                             <input type="checkbox" name="status_verifikasi" value="valid" 
-                                                   class="verify-checkbox w-7 h-7 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors" 
+                                                   class="verify-checkbox w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors" 
                                                    {{ $item->status_verifikasi == 'valid' ? 'checked' : '' }}
                                                    title="Tandai Sesuai">
                                         </form>
@@ -153,7 +153,7 @@
             </div>
 
             {{-- PANEL BERKAS ZIP --}}
-            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col">
+            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col flex-shrink-0">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Keseluruhan Persyaratan</h3>
                     @if($pjkades->metode === 'offline')
@@ -171,17 +171,16 @@
             </div>
 
             {{-- Kolom Catatan Admin --}}
-            <div class="bg-surface rounded-card shadow-sm border border-border p-5 relative">
+            <div class="bg-surface rounded-card shadow-sm border border-border p-5 relative flex-shrink-0">
                 <form action="{{ route('admin.pjkades.update-catatan', $pjkades->id) }}" method="POST">
                     @csrf
-                    <label class="block text-sm font-display font-semibold text-ink mb-2">Evaluasi Syarat Formil</label>
-                    <p class="text-[11px] text-muted mb-3">Tuliskan jika ada syarat yang kurang (khususnya untuk metode offline) atau perbaikan yang harus dilakukan desa.</p>
+                    <label class="block text-sm font-display font-semibold text-ink mb-2">Catatan Admin</label>
                     
                     <textarea name="catatan_admin" rows="3" placeholder="Tulis catatan jika ada berkas yang kurang/salah..." 
                               class="w-full text-sm rounded-lg border-border focus:ring-primary focus:border-primary placeholder-gray-400">{{ old('catatan_admin', $pjkades->catatan_admin) }}</textarea>
                               
                     <div class="mt-3 text-right">
-                        <button type="submit" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white text-xs font-medium rounded shadow-sm transition-colors">
+                        <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-medium rounded shadow-sm transition-colors">
                             Kirim Catatan / Simpan
                         </button>
                     </div>
@@ -190,7 +189,7 @@
 
             {{-- Kolom Kanan: Disposisi & Penerbitan SK --}}
             
-            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col mb-10">
+            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col mb-10 flex-shrink-0">
                 <div class="p-5">
                     <h3 class="text-base font-display font-semibold text-ink mb-1">Status Proses</h3>
                     <p class="text-xs text-muted mb-4 pb-4 border-b border-border">Pantau tahapan perjalanan usulan SK Kades.</p>
@@ -308,15 +307,6 @@
                         const token = form.querySelector('input[name="_token"]').value;
                         const status = this.checked ? 'valid' : 'menunggu';
                         
-                        const row = form.closest('.p-4');
-                        if (this.checked) {
-                            row.classList.remove('border-red-500', 'bg-red-50/40', 'border-amber-400', 'bg-amber-50/30');
-                            row.classList.add('border-green-500', 'bg-green-50/40');
-                        } else {
-                            row.classList.remove('border-green-500', 'bg-green-50/40', 'border-red-500', 'bg-red-50/40');
-                            row.classList.add('border-amber-400', 'bg-amber-50/30');
-                        }
-
                         fetch(url, {
                             method: 'POST',
                             headers: {
@@ -340,13 +330,6 @@
                             console.error('Network error during verification update', err);
                             alert('Gagal menyimpan: ' + err.message);
                             this.checked = !this.checked;
-                            if (this.checked) {
-                                row.classList.remove('border-amber-400', 'bg-amber-50/30', 'border-red-500', 'bg-red-50/40');
-                                row.classList.add('border-green-500', 'bg-green-50/40');
-                            } else {
-                                row.classList.remove('border-green-500', 'bg-green-50/40', 'border-red-500', 'bg-red-50/40');
-                                row.classList.add('border-amber-400', 'bg-amber-50/30');
-                            }
                         });
                     });
                 });

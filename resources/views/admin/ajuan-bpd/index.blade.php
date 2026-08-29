@@ -1,5 +1,5 @@
 <x-app-layout>
-    @section('title', 'Verifikasi Ajuan BPD (PAW)')
+    @section('title', 'Ajuan BPD (PAW)')
 
     <!-- Tabel -->
     <div>

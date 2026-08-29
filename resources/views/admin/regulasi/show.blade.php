@@ -1,10 +1,12 @@
 <x-app-layout>
     @section('title', 'Tinjau Regulasi')
 
-    <div class="mb-4 flex flex-wrap items-center gap-3">
+    <div class="mb-5 flex flex-wrap items-center gap-3">
         <a href="{{ route('admin.regulasi.index') }}"
-            class="text-sm font-medium text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors">
-            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             Kembali ke Daftar Regulasi
         </a>
     </div>
@@ -28,8 +30,11 @@
                     </div>
                     @if($regulasi->file_path)
                         <a href="{{ asset('storage/' . $regulasi->file_path) }}" target="_blank"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-btn hover:bg-primary-light transition-colors flex-shrink-0">
-                            📥 Unduh
+                            class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0" title="Unduh Berkas">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Unduh
                         </a>
                     @endif
                 </div>
@@ -108,93 +113,88 @@
             
             <!-- Info Card -->
             <!-- Info Card -->
-            <div class="rounded-xl p-5 shadow-sm mb-5 relative overflow-hidden flex-shrink-0" style="background-color: #e0f2fe; color: #0c4a6e;">
-                <div class="absolute top-0 right-0 p-4 opacity-20">
-                    <span class="material-symbols-outlined text-8xl" style="color: #0284c7;">account_balance</span>
+            <div class="bg-primary text-white rounded-card shadow-sm p-4 mb-5">
+                <div class="flex justify-between items-start mb-2 gap-2">
+                    <div>
+                        <p class="text-[10px] font-mono text-white uppercase tracking-wider">{{ $regulasi->no_regulasi }}</p>
+                        <h2 class="text-lg font-display font-bold leading-tight mt-0.5">{{ strtoupper($regulasi->desa->nama_desa) }}</h2>
+                    </div>
                 </div>
-                <div class="relative z-10">
-                    <p class="text-xs mb-1 font-mono uppercase tracking-wider" style="color: #0369a1;">{{ $regulasi->no_regulasi }}</p>
-                    <h2 class="text-xl font-bold mb-3" style="color: #082f49;">{{ strtoupper($regulasi->desa->nama_desa) }}</h2>
-                    
-                    <div class="text-sm" style="color: #0f172a;">
-                        <p class="mb-1"><span class="opacity-70">Layanan:</span> Evaluasi Hukum ({{ ucfirst($regulasi->tipe) }})</p>
-                        <p class="mb-1"><span class="opacity-70">Tanggal:</span> {{ $regulasi->tgl_diajukan ? $regulasi->tgl_diajukan->format('d/m/y') : '-' }}</p>
-                    </div>
-
-                    <div class="mt-4 pt-4 border-t border-blue-200">
-                        <p class="text-sm font-semibold mb-1 leading-snug">{{ $regulasi->judul }}</p>
-                        @if($regulasi->deskripsi)
-                            <p class="text-xs mt-2 opacity-90 leading-relaxed italic border-l-2 border-blue-300 pl-2">{{ $regulasi->deskripsi }}</p>
-                        @else
-                            <p class="text-xs mt-2 opacity-60 italic">Tidak ada keterangan yang dilampirkan.</p>
-                        @endif
-                    </div>
+                <div class="text-xs border-t border-white/20 pt-2 flex flex-col gap-1.5">
+                    <p><span class="text-white inline-block w-20">Layanan:</span> <span class="font-medium">Evaluasi Hukum ({{ ucfirst($regulasi->tipe) }})</span></p>
+                    <p><span class="text-white inline-block w-20">Tanggal:</span> <span class="font-medium">{{ $regulasi->tgl_diajukan ? $regulasi->tgl_diajukan->format('d/m/y') : '-' }}</span></p>
                 </div>
             </div>
 
+            <div class="bg-white rounded-card shadow-sm border border-border p-5 mb-5">
+                <h3 class="text-xs font-bold text-ink uppercase tracking-wide mb-2">{{ $regulasi->judul }}</h3>
+                @if($regulasi->deskripsi)
+                    <p class="text-sm text-muted leading-relaxed whitespace-pre-wrap">{{ $regulasi->deskripsi }}</p>
+                @else
+                    <p class="text-sm text-muted italic">Tidak ada keterangan yang dilampirkan.</p>
+                @endif
+            </div>
+
             <!-- Panel Aksi -->
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6 flex-shrink-0">
-                <h3 class="text-md font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">Tindakan Admin</h3>
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-6 overflow-hidden flex-shrink-0">
+                <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
+                    <h3 class="font-display font-semibold text-ink">Tindakan Admin</h3>
+                </div>
 
                 @if($regulasi->status === 'disahkan')
-                    <div class="p-4 bg-green-50 text-green-800 rounded-lg text-sm border border-green-100">
-                        <div class="flex items-center gap-2 mb-2 font-bold">
-                            <span class="material-symbols-outlined">check_circle</span>
-                            Status: Disahkan
-                        </div>
-                        <p class="text-xs">Regulasi ini telah terbit di Lembaran Desa.</p>
-                        @if($regulasi->catatan_revisi)
-                            <div class="mt-3 p-3 bg-white rounded border border-green-200">
-                                <strong class="text-xs block mb-1">Catatan Akhir Sanksi/Legal Note:</strong>
-                                <p class="text-xs">{{ $regulasi->catatan_revisi }}</p>
+                    <div class="p-5">
+                        <div class="p-4 bg-green-50 text-green-800 rounded-lg text-sm border border-green-100">
+                            <div class="flex items-center gap-2 mb-2 font-bold">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Status: Disahkan
                             </div>
-                        @endif
+                            <p class="text-xs">Regulasi ini telah terbit di Lembaran Desa.</p>
+                            @if($regulasi->catatan_revisi)
+                                <div class="mt-3 p-3 bg-white rounded border border-green-200">
+                                    <strong class="text-xs block mb-1">Catatan Akhir Sanksi/Legal Note:</strong>
+                                    <p class="text-xs">{{ $regulasi->catatan_revisi }}</p>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 @else
                     
-                    <!-- Form Setujui -->
-                    <form action="{{ route('admin.regulasi.setujui', $regulasi) }}" method="POST" class="mb-6 pb-6 border-b border-slate-200">
-                        @csrf
-                        <div class="mb-4">
-                            <h4 class="text-sm font-bold text-green-700 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[18px]">verified</span>
+                    <!-- Area Form Catatan & Revisi -->
+                    <div class="p-5 flex flex-col gap-5">
+                        <form action="{{ route('admin.regulasi.kembalikan', $regulasi) }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4">
+                            @csrf
+                            
+                            <div>
+                                <label for="catatan" class="block text-sm font-medium text-ink mb-1.5">Catatan Admin <span class="text-red-500">*</span></label>
+                                <textarea name="catatan" id="catatan" rows="3"
+                                    class="w-full rounded-md border-gray-300 text-ink bg-white focus:border-primary focus:ring focus:ring-primary/20 shadow-sm text-sm"
+                                    placeholder="Tuliskan catatan perbaikan" required></textarea>
+                            </div>
+
+                            <div>
+                                <label for="file_catatan_dinas" class="block text-sm font-medium text-ink mb-1.5">Unggah Draf Coretan (Opsional)</label>
+                                <input type="file" name="file_catatan_dinas" id="file_catatan_dinas"
+                                    class="w-full text-xs box-border rounded-md border border-gray-300 p-2 bg-gray-50 focus:border-primary focus:ring-primary shadow-sm" accept=".doc,.docx,.pdf">
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-2 px-3 bg-white border border-red-300 text-red-600 rounded text-xs font-medium hover:bg-red-50 transition-colors shadow-sm flex justify-center items-center gap-1.5" title="Kembalikan ke Desa (Butuh Revisi)">
+                                Kembalikan untuk Revisi
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Area Tindak Lanjut Setuju -->
+                    <div class="px-5 py-4 bg-gray-50 border-t border-border mt-auto">
+                        <h3 class="text-xs font-semibold text-muted mb-2">Tindak Lanjut Cepat</h3>
+                        <form action="{{ route('admin.regulasi.setujui', $regulasi) }}" method="POST">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin draf regulasi ini sudah benar dan disetujui?')"
+                                class="w-full py-2 px-3 bg-green-600 rounded text-white text-xs font-medium hover:bg-green-700 transition-colors flex items-center justify-center shadow-sm">
                                 Setujui Draft Regulasi
-                            </h4>
-                            <p class="text-[10px] text-slate-500 mt-1">Gunakan form ini jika dokumen sudah dikoreksi dan benar. Desa kemudian akan mengunggah versi PDF final untuk disahkan.</p>
-                        </div>
-
-                        <button type="submit" onclick="return confirm('Apakah Anda yakin draf regulasi ini sudah benar dan disetujui?')"
-                            class="w-full inline-flex justify-center items-center px-4 py-2 font-bold rounded-lg transition-colors text-sm shadow-sm bg-green-600 hover:bg-green-700 text-white">
-                            Setujui Draft
-                        </button>
-                    </form>
-                    
-                    <!-- Form Revisi -->
-                    <form action="{{ route('admin.regulasi.kembalikan', $regulasi) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        
-                        <div class="mb-4">
-                            <label for="catatan" class="block text-xs font-bold text-slate-700 mb-1.5">Catatan Kelengkapan dari Admin untuk Desa</label>
-                            <textarea name="catatan" id="catatan" rows="5"
-                                class="w-full text-sm rounded-lg border-slate-300 text-slate-800 bg-white focus:border-slate-500 focus:ring-slate-500 shadow-sm"
-                                placeholder="Tuliskan catatan perbaikan jika ada dokumen yang kurang lengkap..." required></textarea>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="file_catatan_dinas" class="block text-xs font-bold text-slate-700 mb-1.5">Unggah Draf Coretan (Opsional)</label>
-                            <input type="file" name="file_catatan_dinas" id="file_catatan_dinas"
-                                class="w-full text-xs box-border rounded-lg border-slate-300 p-1.5 bg-slate-50" accept=".doc,.docx,.pdf">
-                            <p class="text-[10px] text-slate-500 mt-1">Lampirkan file bila ada coretan khusus.</p>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full inline-flex justify-center items-center px-4 py-2 font-bold rounded-lg transition-colors text-sm shadow-sm"
-                            style="background-color: #0A1A3A; color: white;">
-                            Kembalikan untuk Revisi
-                        </button>
-                    </form>
-
-
+                            </button>
+                        </form>
+                    </div>
 
                 @endif
             </div>

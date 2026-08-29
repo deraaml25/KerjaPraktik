@@ -1,11 +1,15 @@
 <x-app-layout>
     @section('title', 'Detail Rencana P3D ' . ucwords(strtolower($rencana->desa->nama_desa)))
 
-    @section('back-button')
-        <a href="{{ route('admin.rencana-p3d.index') }}" class="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-border text-muted hover:text-primary hover:border-primary transition-colors shadow-sm" title="Kembali">
-            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+    <div class="mb-5 flex flex-wrap items-center gap-3">
+        <a href="{{ route('admin.rencana-p3d.index') }}"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Kembali ke Daftar Rencana P3D
         </a>
-    @endsection
+    </div>
 
     @if(session('success') || session('error'))
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

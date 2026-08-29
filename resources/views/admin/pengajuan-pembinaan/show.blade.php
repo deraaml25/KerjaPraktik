@@ -1,5 +1,5 @@
 <x-app-layout>
-    @section('title', 'Detail Pengajuan — ' . $pengajuanPembinaan->judul_kegiatan)
+    @section('title', 'Detail Pengajuan')
 
     <div>
         <div class="mb-5 flex flex-wrap items-center gap-3">

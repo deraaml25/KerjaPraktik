@@ -58,7 +58,7 @@
             type="submit"
             class="w-full mt-2 bg-primary hover:bg-primary-light text-ink font-bold tracking-wide py-4 px-6 rounded-2xl transition-all duration-300 shadow-[0_4px_14px_0_rgb(149,187,234,0.39)] hover:shadow-[0_6px_20px_rgba(149,187,234,0.23)] hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
         >
-            Masuk ke SIDmini
+            Masuk ke SiPerangkat
         </button>
     </form>
 </x-guest-layout>

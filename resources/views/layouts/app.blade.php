@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'SIDmini') }} - @yield('title', 'Dashboard')</title>
+        <title>{{ config('app.name', 'SiPerangkat') }} - @yield('title', 'Dashboard')</title>
 
         <!-- Fonts & Icons -->
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,8 +64,8 @@
                         <img src="{{ asset('logo.png') }}" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDKBYY88kZ13swAXZCwTS6ub06DYmk7LgIvWrsJg4M5Mf764XFIciikJ_cuC39VrLn_VfTYs_HVED5VotHHKbdrPkVC9ZxMCk27gHWU2YHiYe1RguIfp1OfWuNAnoKAFkHh9p2cYiVxg-LNb09DpG2Pndv5ZtWWTy7W5rcPBE5qYyBjBfMS8eLV8wYS0VZ9sXduv8_vi7bSuXA4QGHHnSYxzVjt3Th6UicoO9-auMC89VtIMDJ4YkYG-qvLrLDMaAo85-DohAodwHVQ'" alt="Logo" class="w-8 h-8 object-contain">
                     </div>
                     <div class="flex-grow px-4">
-                        <h1 class="text-white font-bold text-lg leading-none font-display">SIDmini</h1>
-                        <p class="text-slate-400 text-[9px] tracking-[0.1em] mt-1 uppercase font-semibold">Village Info System</p>
+                        <h1 class="text-white font-bold text-lg leading-none font-display">SiPerangkat</h1>
+                        <p class="text-slate-400 text-[9px] tracking-[0.1em] mt-1 uppercase font-semibold">Kabupaten Banyumas</p>
                     </div>
                 </div>
 

@@ -83,11 +83,9 @@
                         $colors = [
                             'text-blue-400',
                             'text-orange-400',
-                            'text-blue-400',
-                            'text-orange-400',
                             'text-green-400',
-                            'text-orange-400',
-                            'text-purple-400'
+                            'text-purple-400',
+                            'text-rose-400'
                         ];
                     @endphp
                     @foreach($folders as $idx => $folder)

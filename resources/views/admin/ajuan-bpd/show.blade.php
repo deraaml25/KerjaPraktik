@@ -1,5 +1,5 @@
 <x-app-layout>
-    @section('title', 'Verifikasi Ajuan BPD: ' . $ajuanBpd->no_registrasi)
+    @section('title', 'Ajuan BPD: ' . $ajuanBpd->no_registrasi)
 
     <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
         <a href="{{ route('admin.ajuan-bpd.index') }}"
@@ -69,7 +69,7 @@
                     @if($ajuanBpd->berkas_zip && preg_match('/\.zip|\.rar$/i', $ajuanBpd->berkas_zip))
                         <p class="font-medium text-center px-4">Berkas persyaratan berupa file arsip (ZIP/RAR).<br>Silakan klik tombol "Unduh" di sudut kanan atas untuk melihat isinya.</p>
                     @elseif($ajuanBpd->berkas_zip && preg_match('/\.(pdf|jpe?g|png)$/i', $ajuanBpd->berkas_zip))
-                        <p class="font-medium text-center px-4">Berkas persyaratan berupa file PDF/Gambar.<br>Silakan klik tombol "Lihat" di sudut kanan atas.</p>
+                        <p class="font-medium text-center px-4">Berkas persyaratan berupa file PDF/Gambar.<br>Memuat pratinjau otomatis...</p>
                     @else
                         <p class="font-medium text-center px-4">Pilih dokumen pada tabel di kanan untuk memuat pratinjau</p>
                     @endif
@@ -84,7 +84,7 @@
         <div class="{{ $ajuanBpd->metode !== 'offline' ? 'lg:col-span-5' : 'w-full' }} flex flex-col gap-6 h-full overflow-y-auto pr-2 custom-scrollbar">
 
             {{-- IDENTITAS DESA --}}
-            <div class="bg-primary text-white rounded-card shadow-sm p-4">
+            <div class="bg-primary text-white rounded-card shadow-sm p-4 flex-shrink-0">
                 <div class="flex justify-between items-start mb-2">
                     <div>
                         <p class="text-[10px] font-mono text-primary-soft">{{ $ajuanBpd->no_registrasi }}</p>
@@ -108,7 +108,7 @@
             </div>
 
             {{-- LIST DOKUMEN CHECKLIST --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden flex-shrink-0">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Verifikasi Syarat</h3>
                     <a href="{{ route('admin.ajuan-bpd.print-syarat', $ajuanBpd->id) }}" target="_blank" class="inline-flex items-center text-xs px-2 py-1 bg-white border border-gray-300 rounded font-medium text-ink hover:bg-gray-50 transition-colors shadow-sm">
@@ -119,32 +119,32 @@
 
                 <div class="divide-y divide-border">
                     @foreach($ajuanBpd->checklists->sortBy('templateChecklist.urutan') as $item)
-                        <div class="p-4 border-l-4 transition-colors {{ $item->status == 'terverifikasi' ? 'border-green-500 bg-green-50/40' : ($item->status == 'ditolak' ? 'border-red-500 bg-red-50/40' : 'border-amber-400 bg-amber-50/30') }}">
+                        <div class="p-3 transition-colors hover:bg-slate-50">
                             <div class="flex items-center gap-3">
-                                <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-bold text-ink border border-border shadow-sm flex-shrink-0">{{ $item->templateChecklist->urutan }}</span>
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">{{ $item->templateChecklist->urutan }}</span>
                                 <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
                                     <div class="flex items-center gap-2 flex-wrap">
-                                        <p class="text-sm font-semibold text-ink leading-tight">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
                                             {{ $item->templateChecklist->nama_dokumen }}
                                         </p>
 
                                         @if($item->file_path)
                                             <button
                                                 onclick="previewFile('{{ Storage::disk('public')->url($item->file_path) }}', '{{ addslashes($item->templateChecklist->nama_dokumen) }}')"
-                                                class="ml-2 inline-flex items-center text-xs px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
+                                                class="ml-2 inline-flex items-center text-[10px] px-2 py-1 bg-white hover:bg-gray-50 border border-gray-300 rounded font-medium text-ink transition-colors shadow-sm">
                                                 Lihat Berkas
                                             </button>
                                         @elseif(!$ajuanBpd->berkas_zip)
-                                            <span class="ml-2 inline-block px-2 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded border border-gray-200">Belum Terunggah</span>
+                                            <span class="ml-2 inline-block px-2 py-1 bg-gray-100 text-gray-500 text-[10px] font-medium rounded border border-gray-200">Belum Terunggah</span>
                                         @endif
                                     </div>
 
                                     <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
-                                        <span class="verify-saved-indicator text-xs text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
                                         <form action="{{ route('admin.ajuan-bpd.verify-checklist', [$ajuanBpd->id, $item->id]) }}" method="POST" class="verify-form flex-shrink-0" data-url="{{ route('admin.ajuan-bpd.verify-checklist', [$ajuanBpd->id, $item->id]) }}">
                                             @csrf
                                             <input type="checkbox" name="status" value="terverifikasi" 
-                                                   class="w-7 h-7 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
                                                    {{ $item->status === 'terverifikasi' ? 'checked' : '' }}
                                                    title="Tandai Sesuai">
                                         </form>
@@ -157,22 +157,21 @@
             </div>
 
             {{-- PANEL CATATAN ADMIN --}}
-            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2 overflow-hidden">
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2 overflow-hidden flex-shrink-0">
                 <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
                     <h3 class="font-display font-semibold text-ink">Catatan Perbaikan Desa</h3>
                 </div>
                 <form action="{{ route('admin.ajuan-bpd.catatan', $ajuanBpd->id) }}" method="POST" class="p-5">
                     @csrf
-                    <label class="block text-sm font-medium text-ink mb-2">Catatan Kelengkapan dari Admin untuk Desa</label>
                     <textarea name="catatan_admin" rows="3" class="w-full text-sm border-gray-300 rounded-md focus:border-primary focus:ring focus:ring-primary/20" placeholder="Tuliskan catatan perbaikan jika ada dokumen yang kurang lengkap...">{{ $ajuanBpd->catatan_admin }}</textarea>
                     <div class="mt-3 text-right">
-                        <button type="submit" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white text-xs font-medium rounded shadow-sm transition-colors">Kirim Catatan & Minta Revisi</button>
+                        <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-medium rounded shadow-sm transition-colors">Kirim Catatan & Minta Revisi</button>
                     </div>
                 </form>
             </div>
 
             {{-- Kolom Kanan: Disposisi & Penerbitan SK --}}
-            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col mb-10">
+            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col mb-10 flex-shrink-0">
                 <div class="p-5">
                     <h3 class="text-base font-display font-semibold text-ink mb-1">Status Proses</h3>
                     <p class="text-xs text-muted mb-4 pb-4 border-b border-border">Pantau tahapan perjalanan ajuan secara real-time.</p>
@@ -262,6 +261,13 @@
             }
 
             document.addEventListener('DOMContentLoaded', function() {
+                // Auto preview berkas zip/pdf if available
+                @if($ajuanBpd->berkas_zip && preg_match('/\.(pdf|jpe?g|png)$/i', $ajuanBpd->berkas_zip))
+                    setTimeout(() => {
+                        previewFile('{{ Storage::disk("public")->url($ajuanBpd->berkas_zip) }}', 'Berkas Keseluruhan Persyaratan');
+                    }, 500);
+                @endif
+
                 document.querySelectorAll('.verify-checkbox').forEach(checkbox => {
                     checkbox.addEventListener('change', function() {
                         const form = this.closest('form');
@@ -271,15 +277,6 @@
                         const token = form.querySelector('input[name="_token"]').value;
                         const status = this.checked ? 'terverifikasi' : 'menunggu_verifikasi';
                         
-                        const row = form.closest('.p-4');
-                        if (this.checked) {
-                            row.classList.remove('border-red-500', 'bg-red-50/40', 'border-amber-400', 'bg-amber-50/30');
-                            row.classList.add('border-green-500', 'bg-green-50/40');
-                        } else {
-                            row.classList.remove('border-green-500', 'bg-green-50/40', 'border-red-500', 'bg-red-50/40');
-                            row.classList.add('border-amber-400', 'bg-amber-50/30');
-                        }
-
                         fetch(url, {
                             method: 'POST',
                             headers: {
@@ -296,13 +293,6 @@
                         }).catch(err => {
                             console.error('Network error during verification update', err);
                             this.checked = !this.checked;
-                            if (this.checked) {
-                                row.classList.remove('border-amber-400', 'bg-amber-50/30');
-                                row.classList.add('border-green-500', 'bg-green-50/40');
-                            } else {
-                                row.classList.remove('border-green-500', 'bg-green-50/40');
-                                row.classList.add('border-amber-400', 'bg-amber-50/30');
-                            }
                         });
                     });
                 });

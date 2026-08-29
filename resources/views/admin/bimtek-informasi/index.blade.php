@@ -47,7 +47,7 @@
         </script>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         @forelse ($informasis as $info)
             <div class="bg-white rounded-xl shadow-sm border border-border overflow-hidden flex flex-col hover:shadow-md transition-shadow">
                 @if($info->foto && is_array($info->foto) && count($info->foto) > 0)
@@ -84,7 +84,7 @@
 
                     <div class="flex items-center justify-between gap-2 border-t border-border pt-3 mt-auto">
                         <a href="{{ route('admin.bimtek-informasi.show', $info) }}"
-                            class="text-primary text-xs hover:underline font-medium">Lihat →</a>
+                            class="text-blue-700 hover:text-blue-900 text-xs hover:underline font-bold">Lihat</a>
                         <div class="flex gap-2">
                             <a href="{{ route('admin.bimtek-informasi.edit', $info) }}"
                                 class="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-ink text-xs font-medium rounded transition-colors">Edit</a>

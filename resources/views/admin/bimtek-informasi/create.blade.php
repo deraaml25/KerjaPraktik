@@ -39,9 +39,9 @@
                     <label for="kategori" class="block text-sm font-medium text-ink mb-1">Kategori <span class="text-red-500">*</span></label>
                     <select name="kategori" id="kategori" required
                         class="w-full rounded-md border-border text-ink bg-white focus:border-primary focus:ring-primary shadow-sm">
-                        <option value="informasi" {{ old('kategori') === 'informasi' ? 'selected' : '' }}>📋 Informasi Umum</option>
-                        <option value="dokumentasi" {{ old('kategori') === 'dokumentasi' ? 'selected' : '' }}>📷 Dokumentasi Kegiatan</option>
-                        <option value="pengumuman" {{ old('kategori') === 'pengumuman' ? 'selected' : '' }}>📢 Pengumuman</option>
+                        <option value="informasi" {{ old('kategori') === 'informasi' ? 'selected' : '' }}>Informasi Umum</option>
+                        <option value="dokumentasi" {{ old('kategori') === 'dokumentasi' ? 'selected' : '' }}>Dokumentasi Kegiatan</option>
+                        <option value="pengumuman" {{ old('kategori') === 'pengumuman' ? 'selected' : '' }}>Pengumuman</option>
                     </select>
                 </div>
 

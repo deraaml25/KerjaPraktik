@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l">
+
+        <title>SIDMINI - Verifikasi Ajuan BPD: BPD-1785916252</title>
+
+        <!-- Fonts & Icons -->
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+
+        <!-- Scripts & Styles -->
+        <link rel="preload" as="style" href="http://localhost/build/assets/app-CM9hLqhl.css" /><link rel="modulepreload" as="script" href="http://localhost/build/assets/app-B9qO1Jfl.js" /><link rel="stylesheet" href="http://localhost/build/assets/app-CM9hLqhl.css" /><script type="module" src="http://localhost/build/assets/app-B9qO1Jfl.js"></script>
+        <style>
+            .scrollbar-none::-webkit-scrollbar { display: none; }
+            .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+            body { font-family: 'Inter', sans-serif; }
+            h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+            
+            /* Active Nav Curve CSS */
+            .active-nav-curve {
+                background-color: #f8fafc !important;
+                border-radius: 40px 0 0 40px !important;
+            }
+            .active-nav-curve::before,
+            .active-nav-curve::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                width: 20px;
+                height: 20px;
+                background-color: transparent;
+                pointer-events: none;
+            }
+            .active-nav-curve::before {
+                top: -20px;
+                border-radius: 0 0 20px 0;
+                box-shadow: 10px 10px 0 10px #f8fafc;
+            }
+            .active-nav-curve::after {
+                bottom: -20px;
+                border-radius: 0 20px 0 0;
+                box-shadow: 10px -10px 0 10px #f8fafc;
+            }
+        </style>
+
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body class="font-sans antialiased bg-[#f8fafc] text-slate-900 flex h-screen overflow-hidden text-sm">
+        
+        <!-- SIDEBAR -->
+        <aside class="flex-shrink-0 flex flex-col z-30 relative w-[260px] bg-[#0A1A3A] h-screen rounded-tr-[32px] rounded-br-[32px] shadow-xl overflow-hidden transition-all duration-300">
+            <!-- Background Kiri (Icon Rail) -->
+            <div class="absolute left-0 top-0 w-[60px] h-full bg-[#738FB9] z-0 shadow-md"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Logo Header -->
+                <div class="flex items-center h-[72px] border-b border-white/10 bg-black/10 relative">
+                    <div class="w-[60px] flex-shrink-0 flex justify-center items-center">
+                        <img src="http://localhost/logo.png" onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDKBYY88kZ13swAXZCwTS6ub06DYmk7LgIvWrsJg4M5Mf764XFIciikJ_cuC39VrLn_VfTYs_HVED5VotHHKbdrPkVC9ZxMCk27gHWU2YHiYe1RguIfp1OfWuNAnoKAFkHh9p2cYiVxg-LNb09DpG2Pndv5ZtWWTy7W5rcPBE5qYyBjBfMS8eLV8wYS0VZ9sXduv8_vi7bSuXA4QGHHnSYxzVjt3Th6UicoO9-auMC89VtIMDJ4YkYG-qvLrLDMaAo85-DohAodwHVQ'" alt="Logo" class="w-8 h-8 object-contain">
+                    </div>
+                    <div class="flex-grow px-4">
+                        <h1 class="text-white font-bold text-lg leading-none font-display">SIDmini</h1>
+                        <p class="text-slate-400 text-[9px] tracking-[0.1em] mt-1 uppercase font-semibold">Village Info System</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="flex-1 overflow-y-auto scrollbar-none pt-2 flex flex-col w-full">
+                                            <a href="http://localhost/desa/dashboard" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">grid_view</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Dashboard
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/regulasi" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">description</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Draft Regulasi
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/pengajuan-pembinaan" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">history_edu</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Pembinaan
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/ajuan" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">approval</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    e-Rekomendasi
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/pjkades" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    SK Kades
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/rencana-p3d" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">assignment</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Rencana P3D
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/perangkat" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">badge</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Data Kepala dan Perangkat Desa
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/bpd" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">groups</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Data BPD
+                </span>
+            </div>
+        </a>
+            
+            <a href="http://localhost/desa/ajuan-bpd" class="group flex items-center h-[44px] w-full relative hover:bg-white/5 transition-colors rounded-xl">
+            <div class="w-[60px] flex-shrink-0 flex items-center justify-center text-white transition-colors relative z-10">
+                <span class="material-symbols-outlined text-[20px]">post_add</span>
+            </div>
+            <div class="flex-grow h-full flex items-center pl-4 transition-all duration-300 group-hover:pl-6">
+                <span class="font-semibold text-[13px] text-white/80 group-hover:text-white transition-colors">
+                    Ajuan BPD
+                </span>
+            </div>
+        </a>
+                                        </nav>
+
+                <!-- User Profile Footer -->
+                <div class="mt-auto flex w-full py-4 border-t border-white/10 bg-black/10 relative">
+                    <div class="w-[60px] flex-shrink-0 flex justify-center">
+                        <div class="relative h-8 w-8">
+                            <div class="w-8 h-8 rounded-full border-2 border-white/30 overflow-hidden shadow-lg bg-slate-200 flex items-center justify-center text-slate-800 font-bold text-[10px]">
+                                Ad
+                            </div>
+                            <div class="absolute -right-0.5 -bottom-0.5 w-3 h-3 bg-green-500 border-2 border-[#738FB9] rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-grow px-4 flex flex-col justify-center overflow-hidden">
+                        <h3 class="text-white font-bold text-xs truncate">Admin</h3>
+                        <p class="text-slate-400 text-[9px] uppercase font-semibold tracking-wide truncate mt-0.5">
+                            Operator Desa
+                        </p>
+
+                        <div class="flex flex-col gap-2 mt-2.5">
+                            <a href="http://localhost/profile" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-[11px] font-semibold w-full">
+                                <span class="material-symbols-outlined text-[14px]">manage_accounts</span>
+                                Profil Saya
+                            </a>
+                            <form method="POST" action="http://localhost/logout" class="w-full" data-turbo="false">
+                                <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                <button type="submit" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-[11px] font-semibold w-full">
+                                    <span class="material-symbols-outlined text-[14px]">logout</span>
+                                    Keluar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="flex-1 flex flex-col relative z-10 overflow-hidden bg-[#f8fafc]">
+            <!-- Top App Bar -->
+            <div class="sticky top-0 z-40 px-6 pt-5 pb-2 bg-[#f8fafc]">
+                <div class="flex items-center gap-3">
+                                        <header class="flex-1 flex items-center justify-between px-5 py-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-slate-200/60 transition-all duration-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-1 h-6 bg-[#738FB9] rounded-full"></div>
+                            <div class="flex flex-col">
+                                                                <h2 class="text-lg text-[#111827] font-bold font-display tracking-tight leading-none">
+                                    Verifikasi Ajuan BPD: BPD-1785916252                                </h2>
+                                                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                                                        <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
+                            <button class="w-8 h-8 rounded-full bg-slate-50 shadow-sm border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors relative">
+                                <span class="material-symbols-outlined text-[18px]">notifications</span>
+                                <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                            </button>
+                        </div>
+                    </header>
+                </div>
+            </div>
+
+            <main class="flex-1 overflow-y-auto px-6 pb-8 scrollbar-none mt-2">
+                <div class="mx-auto max-w-[1100px]">
+                    <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <a href="http://localhost/admin/ajuan-bpd"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Kembali ke Daftar Antrean
+        </a>
+        <div class="flex items-center gap-3">
+            <!-- Badge status dihilangkan atas permintaan user -->
+        </div>
+    </div>
+
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[80vh]">
+
+                
+        <div
+            class="lg:col-span-7 bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden h-full">
+            <div class="px-4 py-3 border-b border-border bg-gray-50 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-ink">Berkas Keseluruhan Persyaratan</p>
+                </div>
+                                    <div class="flex gap-2">
+
+                        <a href="http://localhost/storage/uploads/bpd/BPD-1785916252/BPD-1785916252_berkas_persyaratan.pdf" target="_blank"
+                            class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded hover:bg-primary-light transition-colors flex-shrink-0">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Unduh
+                        </a>
+                    </div>
+                            </div>
+            <div class="flex-1 bg-gray-200 relative p-2" id="pdf-container">
+                <!-- PDF Viewer / Empty State -->
+                <div id="pdf-empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-muted">
+                    <svg class="w-16 h-16 mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                                            <p class="font-medium text-center px-4">Berkas persyaratan berupa file PDF/Gambar.<br>Memuat pratinjau otomatis...</p>
+                                    </div>
+                <iframe id="pdf-iframe" src="" class="w-full h-full rounded shadow-sm border border-gray-300 hidden" frameborder="0"></iframe>
+                <img id="img-preview" src="" class="w-full h-full object-contain rounded shadow-sm border border-gray-300 hidden">
+            </div>
+        </div>
+        
+        
+        <div class="lg:col-span-5 flex flex-col gap-6 h-full overflow-y-auto pr-2 custom-scrollbar">
+
+            
+            <div class="bg-primary text-white rounded-card shadow-sm p-4">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <p class="text-[10px] font-mono text-primary-soft">BPD-1785916252</p>
+                        <h2 class="text-lg font-display font-bold leading-tight">Cilangkap</h2>
+                    </div>
+                </div>
+                <div class="text-xs border-t border-white/20 pt-2 flex flex-col gap-1">
+                    <p><span class="text-primary-soft inline-block w-16">Layanan:</span>
+                        Ajuan BPD (Pemberhentian)</p>
+
+                    <p class="text-primary-soft font-medium mt-1">Daftar BPD (1 Orang):</p>
+                    <div class="max-h-20 overflow-y-auto custom-scrollbar space-y-1.5 pr-1">
+                                                    <div class="bg-black/10 rounded p-1.5 border border-white/5 text-[10px]">
+                                <span class="font-bold block">1. LILIS ARIYANTI, S.I.P</span>
+                                <span class="opacity-80 block">Sekretaris BPD</span>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+
+            
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col overflow-hidden">
+                <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
+                    <h3 class="font-display font-semibold text-ink">Verifikasi Syarat</h3>
+                    <a href="http://localhost/admin/ajuan-bpd/14/print-syarat" target="_blank" class="inline-flex items-center text-xs px-2 py-1 bg-white border border-gray-300 rounded font-medium text-ink hover:bg-gray-50 transition-colors shadow-sm">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Print Checklist
+                    </a>
+                </div>
+
+                <div class="divide-y divide-border">
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">1</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat Pengantar dari Kecamatan ditujukan kepada Bupati Banyumas c.q. Kepala Dinpermasdes Kabupaten Banyumas
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/175" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/175">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   checked
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">2</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat dari Camat kepada Bupati Banyumas c.q. Kepala Dinpermasdes perihal Permohonan Usulan SK Bupati Banyumas tentang Pemberhentian dan Peresmian Anggota BPD PAW
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/176" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/176">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   checked
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">3</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat dari Kepala Desa kepada Bupati melalui Camat perihal Permohonan Usulan SK Bupati tentang Pemberhentian dan Peresmian Anggota BPD PAW
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/177" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/177">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   checked
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">4</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat dari Ketua BPD kepada Bupati melalui Kepala Desa perihal Permohonan Usulan SK Bupati tentang Pemberhentian dan Peresmian Anggota BPD PAW
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/178" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/178">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   checked
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">5</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi Undangan, Daftar Hadir, Notula, Dokumentasi, dan Berita Acara Musyawarah BPD tentang Pembahasan Pemberhentian Anggota BPD
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/179" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/179">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">6</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi Undangan, Daftar Hadir, Notula, Dokumentasi, dan Berita Acara Musyawarah BPD tentang Pembahasan Penunjukan Anggota BPD PAW (atau dapat digabung menjadi satu dengan musyawarah pemberhentian anggota BPD)
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/180" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/180">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">7</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat Pengunduran Diri (bermeterai) dari Anggota BPD yang Mengundurkan Diri / Surat Keterangan Kematian (jika meninggal dunia) / Bukti Pelanggaran (jika diberhentikan)
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/181" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/181">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">8</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat Pernyataan Kesanggupan Menjadi Anggota BPD PAW (bermeterai)
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/182" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/182">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">9</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Surat Pernyataan Kebenaran Dokumen dari Kepala Desa
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/183" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/183">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">10</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi KTP dan KK Anggota BPD yang Diberhentikan
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/184" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/184">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">11</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi KTP, KK, dan Ijazah Anggota BPD Pengganti
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/185" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/185">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">12</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi SK BPD Induk (Tahun 2020) dan SK PAW (jika ada)
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/186" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/186">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="p-3 transition-colors hover:bg-slate-50">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-ink border border-slate-200 shadow-sm flex-shrink-0">13</span>
+                                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs font-semibold text-ink leading-tight">
+                                            Fotokopi SK BPD tentang Penambahan Masa Keanggotaan (Tahun 2024)
+                                        </p>
+
+                                                                            </div>
+
+                                    <div class="flex items-center gap-2 flex-shrink-0 ml-auto sm:ml-4">
+                                        <span class="verify-saved-indicator text-[10px] text-green-600 font-medium hidden">✓ Tersimpan</span>
+                                        <form action="http://localhost/admin/ajuan-bpd/14/verify-checklist/187" method="POST" class="verify-form flex-shrink-0" data-url="http://localhost/admin/ajuan-bpd/14/verify-checklist/187">
+                                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                                            <input type="checkbox" name="status" value="terverifikasi" 
+                                                   class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded shadow-sm cursor-pointer transition-colors verify-checkbox" 
+                                                   
+                                                   title="Tandai Sesuai">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+
+            
+            <div class="bg-surface rounded-card border border-border shadow-sm flex flex-col mb-2 overflow-hidden">
+                <div class="px-5 py-4 border-b border-border bg-gray-50 flex justify-between items-center">
+                    <h3 class="font-display font-semibold text-ink">Catatan Perbaikan Desa</h3>
+                </div>
+                <form action="http://localhost/admin/ajuan-bpd/14/catatan" method="POST" class="p-5">
+                    <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                    <label class="block text-sm font-medium text-ink mb-2">Catatan Kelengkapan dari Admin untuk Desa</label>
+                    <textarea name="catatan_admin" rows="3" class="w-full text-sm border-gray-300 rounded-md focus:border-primary focus:ring focus:ring-primary/20" placeholder="Tuliskan catatan perbaikan jika ada dokumen yang kurang lengkap..."></textarea>
+                    <div class="mt-3 text-right">
+                        <button type="submit" class="px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-medium rounded shadow-sm transition-colors">Kirim Catatan & Minta Revisi</button>
+                    </div>
+                </form>
+            </div>
+
+            
+            <div class="bg-surface rounded-card shadow-sm border border-border flex flex-col mb-10">
+                <div class="p-5">
+                    <h3 class="text-base font-display font-semibold text-ink mb-1">Status Proses</h3>
+                    <p class="text-xs text-muted mb-4 pb-4 border-b border-border">Pantau tahapan perjalanan ajuan secara real-time.</p>
+                    
+                    <div class="relative py-4">
+    <!-- Vertical Line -->
+    <div class="absolute left-[23px] top-6 bottom-6 w-0.5 bg-border z-0"></div>
+
+    <div class="space-y-6 relative z-10">
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center border-4 border-white shadow-sm">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-ink">
+                        Berkas Diterima
+                    </h4>
+
+                    
+                                            <div class="mt-1 text-xs text-muted flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            05/08/26
+                        </div>
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center border-4 border-white shadow-sm">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-ink">
+                        Verifikasi &amp; Validasi Petugas
+                    </h4>
+
+                    
+                                            <div class="mt-1 text-xs text-muted flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            29/08/26
+                        </div>
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center border-4 border-white shadow-sm">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-ink">
+                        Penyusunan Draft Rekomendasi
+                    </h4>
+
+                    
+                                            <div class="mt-1 text-xs text-muted flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            29/08/26
+                        </div>
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div
+                            class="w-12 h-12 rounded-full bg-white border-4 border-primary shadow-sm flex items-center justify-center relative">
+                            <div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                            <!-- Ping animation -->
+                            <div class="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-20"></div>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-ink">
+                        Verifikasi &amp; Validasi Kabid PDPD
+                    </h4>
+
+                                            <span
+                            class="inline-block mt-1 text-xs font-medium text-primary bg-primary-soft px-2 py-0.5 rounded-full">Sedang
+                            Berjalan</span>
+                    
+                                            <div class="mt-1 text-xs text-muted flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            29/08/26
+                        </div>
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">5</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Verifikasi &amp; Validasi Sekretaris Dinas
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">6</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Verifikasi &amp; Validasi Kepala Dinas
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">7</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Verifikasi &amp; Validasi Kepala Bagian Hukum
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">8</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Verifikasi &amp; Validasi Asisten Pemerintahan &amp; Kesra
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">9</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Verifikasi &amp; Validasi Sekda
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">10</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Tanda Tangan Bupati
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">11</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Penomoran TU Umum Setda
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">12</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Sudah di Dinpermasdes
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+                    
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-0.5">
+                                            <div class="w-12 h-12 rounded-full bg-white border-4 border-border flex items-center justify-center">
+                            <span class="text-muted font-medium">13</span>
+                        </div>
+                                    </div>
+
+                <div class="ml-4 mt-1.5 flex-1 pb-2">
+                    <h4 class="text-sm font-semibold text-muted">
+                        Sudah di Desa (Nama Penerima)
+                    </h4>
+
+                    
+                                    </div>
+            </div>
+            </div>
+</div>
+                </div>
+
+                <div class="px-5 py-4 bg-gray-50 border-t border-border mt-auto rounded-b-card">
+                    <h3 class="text-xs font-semibold text-muted mb-2">Tindak Lanjut Cepat</h3>
+                    <div class="flex flex-col gap-2">
+                        
+                                                <form action="http://localhost/admin/ajuan-bpd/14/disposisi" method="POST">
+                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                            <input type="hidden" name="tahapan" value="Verifikasi &amp; Validasi Sekretaris Dinas">
+                            <button type="submit"
+                                class="w-full py-2 px-3 bg-primary rounded text-white text-xs font-medium hover:bg-primary-light transition-colors flex items-center justify-center shadow-sm">
+                                Lanjutkan ke : Verifikasi &amp; Validasi Sekretaris Dinas
+                            </button>
+                        </form>
+                        
+                        <form action="http://localhost/admin/ajuan-bpd/14/disposisi" method="POST">
+                            <input type="hidden" name="_token" value="vsi8bbzbC3eih8F2oe4Yvllhhxka0NxVDfA52x4l" autocomplete="off">                            <input type="hidden" name="tahapan" value="revisi">
+                            <button type="button" onclick="const note = prompt('Masukkan catatan revisi:'); if(note) { this.form.insertAdjacentHTML('beforeend', '<input type=\'hidden\' name=\'catatan\' value=\''+note+'\'>'); this.form.submit(); }"
+                                class="w-full py-2 px-3 bg-white border border-red-200 text-red-600 rounded text-xs font-medium hover:bg-red-50 transition-colors flex items-center justify-center shadow-sm">
+                                Revisi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+                </div>
+            </main>
+        </div>
+                <script>
+            function previewFile(url, title) {
+                document.getElementById('pdf-empty-state').classList.add('hidden');
+                const iframe = document.getElementById('pdf-iframe');
+                const img = document.getElementById('img-preview');
+                
+                iframe.classList.add('hidden');
+                img.classList.add('hidden');
+
+                if (url.toLowerCase().endsWith('.pdf')) {
+                    iframe.src = url;
+                    iframe.classList.remove('hidden');
+                } else {
+                    img.src = url;
+                    img.classList.remove('hidden');
+                }
+                
+                document.getElementById('preview-title').innerText = title;
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Auto preview berkas zip/pdf if available
+                                    setTimeout(() => {
+                        previewFile('http://localhost/storage/uploads/bpd/BPD-1785916252/BPD-1785916252_berkas_persyaratan.pdf', 'Berkas Keseluruhan Persyaratan');
+                    }, 500);
+                
+                document.querySelectorAll('.verify-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const form = this.closest('form');
+                        const wrapper = form.closest('.flex.items-center.gap-2');
+                        const indicator = wrapper ? wrapper.querySelector('.verify-saved-indicator') : null;
+                        const url = form.getAttribute('data-url');
+                        const token = form.querySelector('input[name="_token"]').value;
+                        const status = this.checked ? 'terverifikasi' : 'menunggu_verifikasi';
+                        
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': token,
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({ status: status })
+                        }).then(response => {
+                            if (indicator) {
+                                indicator.classList.remove('hidden');
+                                setTimeout(() => indicator.classList.add('hidden'), 2000);
+                            }
+                        }).catch(err => {
+                            console.error('Network error during verification update', err);
+                            this.checked = !this.checked;
+                        });
+                    });
+                });
+            });
+        </script>
+        <style>
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background-color: #cbd5e1;
+                border-radius: 20px;
+            }
+        </style>
+        </body>
+</html>
+

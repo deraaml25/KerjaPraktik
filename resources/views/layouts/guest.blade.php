@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Masuk — SIDmini</title>
+        <title>Masuk — SiPerangkat</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-background text-ink">
@@ -83,7 +83,7 @@
                     {{ $slot }}
 
                     <p class="mt-8 text-center text-xs text-muted/70 font-medium tracking-wide">
-                        &copy; {{ date('Y') }} Dinpermasdes — SIDmini v1.0
+                        &copy; {{ date('Y') }} Dinpermasdes — SiPerangkat v1.0
                     </p>
                 </div>
             </div>

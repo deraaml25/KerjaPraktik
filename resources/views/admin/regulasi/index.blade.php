@@ -41,16 +41,16 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($reg->status === 'disahkan')
                                     <span
-                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-green-100 text-green-800" style="width: 170px;">DISAHKAN</span>
+                                        class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-green-100 text-green-800" style="width: 180px;">DISAHKAN</span>
                                 @elseif($reg->status === 'perlu_revisi')
                                     <span
-                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-red-100 text-red-800" style="width: 170px;">PERLU REVISI</span>
+                                        class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-red-100 text-red-800" style="width: 180px;">PERLU REVISI</span>
                                 @elseif($reg->status === 'disetujui')
                                     <span
-                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-emerald-100 text-emerald-800" style="width: 170px;">MENUNGGU DESA SAHKAN</span>
+                                        class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-emerald-100 text-emerald-800" style="width: 180px;">MENUNGGU DESA SAHKAN</span>
                                 @else
                                     <span
-                                        class="inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-bold uppercase bg-blue-100 text-blue-800" style="width: 170px;">MENUNGGU VERIFIKASI</span>
+                                        class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-blue-100 text-blue-800" style="width: 180px;">MENUNGGU VERIFIKASI</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

@@ -187,6 +187,7 @@ Route::middleware(['auth', 'role:super_admin'])->prefix('admin')->name('admin.')
 
     // Manajemen Akun Desa
     Route::get('/akun-desa', [AkunDesaController::class, 'index'])->name('akun_desa.index');
+    Route::post('/akun-desa', [AkunDesaController::class, 'store'])->name('akun_desa.store');
     Route::patch('/akun-desa/{user}/password', [AkunDesaController::class, 'updatePassword'])->name('akun_desa.update_password');
 
     // Modul e-Rekomendasi (Admin Verification)

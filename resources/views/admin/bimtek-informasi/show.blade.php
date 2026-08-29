@@ -1,15 +1,18 @@
 <x-app-layout>
     @section('title', $bimtekInformasi->judul)
 
+    <div class="mb-5 flex flex-wrap items-center gap-3">
+        <a href="{{ route('admin.bimtek-informasi.index') }}"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all shadow-sm group">
+            <svg class="w-4 h-4 mr-2 text-slate-500 group-hover:text-slate-700 group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Kembali ke Daftar Pembinaan
+        </a>
+    </div>
+
     <div class="max-w-4xl mx-auto">
         <div class="bg-white rounded-card shadow-sm border border-border p-8">
-            <a href="{{ route('admin.bimtek-informasi.index') }}"
-                class="text-sm text-primary hover:underline flex items-center gap-1 mb-5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-                Kembali ke Daftar
-            </a>
 
             @if($bimtekInformasi->foto && is_array($bimtekInformasi->foto) && count($bimtekInformasi->foto) > 0)
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -29,7 +32,7 @@
                     {{ ucfirst($bimtekInformasi->kategori) }}
                 </span>
                 @if($bimtekInformasi->isPublished())
-                    <span class="px-2.5 py-1 rounded text-xs font-medium bg-green-100 text-green-700">✅ Terpublikasi</span>
+                    <span class="px-2.5 py-1 rounded text-xs font-medium bg-green-100 text-green-700">Terpublikasi</span>
                 @else
                     <span class="px-2.5 py-1 rounded text-xs font-medium bg-gray-100 text-gray-500">Draft</span>
                 @endif
